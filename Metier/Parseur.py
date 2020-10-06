@@ -51,6 +51,8 @@ class Parseur:
     def getNomFichier():
         return self.nomFichier
 
+    def getListeCoordonnees():
+        return self.listeCoordonnees
+
+
     
-P = Parseur("lettreA.json","N")
-P.lireFichier()
