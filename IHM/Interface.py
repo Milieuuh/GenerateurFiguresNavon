@@ -1,4 +1,5 @@
 
+import tkinter
 
 class Interface:
 
