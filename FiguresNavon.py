@@ -2,8 +2,7 @@
 
 class FigureNavon:
 
-    def __init__(self):
-        print("ça marche !")
-
-
-f1 = FigureNavon()
+    def __init__(self, elementG, elementL):
+        self.elementGlobal = elementG
+        self.elementLocal = elementL
+        
