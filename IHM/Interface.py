@@ -1,5 +1,7 @@
 
 import tkinter
+import aider
+import aPropos
 
 class Interface:
 
