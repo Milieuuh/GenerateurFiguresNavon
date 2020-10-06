@@ -44,7 +44,8 @@ class Parseur:
             self.listeCoordonnees.append(int(data['Droite '+ str(nb)]['Point Arrive Y']))
 
 
-
+    def get(self, numero):
+            return self.listeCoordonnees[numero]
 
         
     ##############################GETTER
