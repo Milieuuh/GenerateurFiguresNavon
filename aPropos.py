@@ -1,4 +1,4 @@
 class aPropos:
 
-    def __aPropos(self):
+    def __init__(self):
         print("aPropos")

@@ -1,4 +1,4 @@
 class aide:
 
-    def ___aide(self):
+    def __init__(self):
         print("aide")
