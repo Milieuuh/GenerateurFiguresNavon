@@ -1,0 +1,20 @@
+{
+   "Droite 0": {
+	"Point Depart X": 1,
+	"Point Depart Y": 0,
+	"Point Arrive X": 1,
+	"Point Arrive Y":100
+	},
+	"Droite 1": {
+	"Point Depart X": 0,
+	"Point Depart Y": 50,
+	"Point Arrive X": 70,
+	"Point Arrive Y":50
+	},
+	"Droite 2": {
+	"Point Depart X": 70,
+	"Point Depart Y": 0,
+	"Point Arrive X": 70,
+	"Point Arrive Y":100
+	}
+}
