@@ -20,7 +20,7 @@ class FigureNavon:
 
     def creerFigureNavon(self):
         print("creation Figure")
-        self.parser = Parseur.Parseur("lettreA.json", elementGlobal)
+        self.parser = Parseur.Parseur("lettre"+self.elementGlobal+".json", elementGlobal)
         self.parser.lireFichier()
 
         #creation de l'image
@@ -28,11 +28,12 @@ class FigureNavon:
 
         img1 = ImageDraw.Draw(img_figure_navon)
 
-        
-        img1.line((self.parser.get(0), self.parser.get(1)), fill=(0,0,255), width=5)
-        img1.line((self.parser.get(2), self.parser.get(3)), fill=(0,0,255), width=5)
-        img1.line((self.parser.get(4), self.parser.get(5)), fill=(0,0,255), width=5)
-
+        i=0
+        while i<len(self.parser.getListeCoordonnees()):
+             img1.line([(self.parser.get(i), self.parser.get(i+1)), (self.parser.get(i+2), self.parser.get(i+3))], fill=(0,0,255), width=5)
+             i=i+4
+            
+       
         img_figure_navon.show()
         #self.sauvegarderFigure(img1)        
         

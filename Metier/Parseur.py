@@ -52,7 +52,7 @@ class Parseur:
     def getNomFichier():
         return self.nomFichier
 
-    def getListeCoordonnees():
+    def getListeCoordonnees(self):
         return self.listeCoordonnees
 
 
