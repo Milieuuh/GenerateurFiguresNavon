@@ -1,5 +1,6 @@
 
 import tkinter
+from tkinter import *
 import aider
 import aPropos
 
@@ -12,64 +13,53 @@ def generer():
     print("generer à faire : ")
         
 
+
+  
 #fenetrePrincipale
 maFenetre = tkinter.Tk()
 
 maFenetre.title("générateur de Navon")
 maFenetre.geometry("700x800")
 
-Titre = tkinter.StringVar()
-l_lettreGlobale = tkinter.Label(maFenetre, textvariable=Titre)
-Titre.set("------ Générateur de Navon  ------")
-l_lettreGlobale.grid(row=0,column=10,padx=0,pady=0)
+#--------------------------------------------------------------------- TITRE
+f_titre= tkinter.Frame(maFenetre, borderwidth=2, relief=GROOVE)
+f_titre.pack(side=TOP,padx=1,pady=30)
+Label(f_titre,text="------ Générateur de Navon  ------").pack(padx=10,pady=10)
 
 
-#--------------------------------------------------------------------- FORME DES LETTRES
-   
+#--------------------------------------------------------------------- PARAMETRE DES LETTRES
+lf_formeLettres= tkinter.LabelFrame(maFenetre, text="Paramètres de la figure de Navon",padx=5,pady=1)
+lf_formeLettres.pack(fill="both",expand="yes")
+
 #Label lettre Globale et champs de saisie
-Text = tkinter.StringVar()
-l_lettreGlobale = tkinter.Label(maFenetre, textvariable=Text)
-Text.set("Lettre Globale : ")
-l_lettreGlobale.grid(row=1,column=1,padx=5,pady=100)
-
-lettreGlobale=tkinter.StringVar()
-lettreGlobale.set("A")
-champ_lettreGlobale = tkinter.Entry(maFenetre,textvariable=lettreGlobale, bg="white", width="10")
-champ_lettreGlobale.grid(row=1,column=10,padx=5,pady=235)
-
+s_lGlobale=tkinter.StringVar()
+s_lGlobale.set("A")
+Label(lf_formeLettres,text="Lettre Globale : ").pack()
+champ_lettreGlobale = tkinter.Entry(lf_formeLettres,textvariable=s_lGlobale, bg="white", width="10")
+champ_lettreGlobale.pack()
 
 #Label lettre locale et champ de saisie
-Text2 = tkinter.StringVar()
-l_lettreLocale = tkinter.Label(maFenetre, textvariable=Text2)
-Text2.set("Lettre Locale : ")
-l_lettreLocale.grid(row=1,column=15,padx=5,pady=100)
+s_lLocale=tkinter.StringVar()
+s_lLocale.set("B")
+Label(lf_formeLettres,text="Lettre Locale : ").pack()
+champ_lettreLocale = tkinter.Entry(lf_formeLettres,textvariable=s_lLocale, bg="white", width="10")
+champ_lettreLocale.pack()
 
-lettreLocale=tkinter.IntVar()
-lettreLocale.set("B")
-champ_lettreLocale =  tkinter.Entry(maFenetre,textvariable=lettreLocale, bg="white", width="10")
-champ_lettreLocale.grid(row=1,column=20,padx=5,pady=235)
-
-
-#---------------------------------------------------------------------TAILLE DES LETTRES GLOBALES
-t_tailleGX = tkinter.StringVar()
-l_tailleGX = tkinter.Label(maFenetre, textvariable=t_tailleGX)
-t_tailleGX.set("Lettre Locale : ")
-l_tailleGX.grid(row=2,column=1,padx=10,pady=100)
-
+#Taille lettre globale
 nb_tailleGX = tkinter.IntVar()
 nb_tailleGX.set(800)
-champ_tailleGX = tkinter.Entry(maFenetre,textvariable=nb_tailleGX, bg="white", width="10")
-champ_tailleGX.grid(row=2,column=10,padx=0,pady=235)
-
-
-
+Label(lf_formeLettres,text="Taille lettre globale : ").pack()
+champ_tailleGX = tkinter.Entry(lf_formeLettres,textvariable=nb_tailleGX, bg="white", width="10")
+champ_tailleGX.pack()
 
 
 #--------------------------------------------------------------------- BOUTON GENERER
-
+lf_sauvegardeForme= tkinter.LabelFrame(maFenetre, text="Sauvegarder la/les figures de Navon",padx=5,pady=1)
+lf_sauvegardeForme.pack(fill="both",expand="yes")
 #Bouton générer
-bt_Generer = tkinter.Button(maFenetre,text="Générer",command=generer)
-bt_Generer.grid(row=5,column=10,padx=15,pady=5)
+bt_Generer = tkinter.Button(lf_sauvegardeForme,text="Générer",command=generer)
+bt_Generer.pack()
+
 
 #--------------------------------------------------------------------- GENERATION FENETRE
 
