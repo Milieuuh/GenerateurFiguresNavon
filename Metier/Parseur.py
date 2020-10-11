@@ -20,7 +20,8 @@ class Parseur:
     def lireFichier(self):
         print("Lecture en cours du fichier")
 
-        with open("../Templates/"+self.nomFichier, 'r') as fichier:
+        #with open("../Templates/"+self.nomFichier, 'r') as fichier:
+        with open("Templates/"+self.nomFichier, 'r') as fichier:
             data = json.load(fichier)
 
         self.recupererPoints(data)

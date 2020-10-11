@@ -30,40 +30,13 @@ class FigureNavon:
 
         i=0
         while i<len(self.parser.getListeCoordonnees()):
-             #img1.line([(self.parser.get(i), self.parser.get(i+1)), (self.parser.get(i+2), self.parser.get(i+3))], fill=(0,0,255), width=5)
-             self.placementElementsLocaux(self.parser.get(i), self.parser.get(i+1), self.parser.get(i+2), self.parser.get(i+3), img1)
+             img1.line([(self.parser.get(i), self.parser.get(i+1)), (self.parser.get(i+2), self.parser.get(i+3))], fill=(0,0,255), width=5)
              i=i+4
             
        
         img_figure_navon.show()
         #self.sauvegarderFigure(img1)        
         
-
-    def placementElementsLocaux(self, Xa, Ya, Xb, Yb, img):
-        #calcul de l'équation des droites
-            #coeff directeur m et de p
-        if Xb-Xa!=0:
-            m= (Yb-Ya)/(Xb-Xa)
-            p= Ya - Xa*m
-
-            i=Xa
-            for i in range(Xa, Xb, 10):
-                y= m*i+p
-                texte = img.multiline_text((i,y), str(self.elementLocal), fill=(0, 0, 0))
-
-            #x=k, k étant une constante
-        elif Xa==Xb:
-            y=Ya
-            while y<Yb:
-                texte = img.multiline_text((Xa,y), str(self.elementLocal), fill=(0, 0, 0))
-                y= y+10
-      
-                
-            
-
-        #print("m : "+str(m)+" p : "+str(p))
-
-   
         
         
     def ajouterFigureNavon(newFigureNavon):
@@ -86,5 +59,5 @@ class FigureNavon:
         return self.listeFiguresNavon
 
 
-F = FigureNavon("V","I")
-F.creerFigureNavon()
+#F = FigureNavon("M","N") 
+#F.creerFigureNavon()
