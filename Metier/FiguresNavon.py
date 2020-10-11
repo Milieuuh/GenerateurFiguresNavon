@@ -49,17 +49,17 @@ class FigureNavon:
             i=Xa
             for i in range(Xa, Xb, 10):
                 y= m*i+p
-                texte = img.multiline_text((i,y), "N", fill=(0, 0, 0))
+                texte = img.multiline_text((i,y), str(self.elementLocal), fill=(0, 0, 0))
 
             #x=k, k étant une constante
-        elif Ya==0 & Yb==0:
-            k=Xa
-            for i in range(Ya, Yb, 10):
-                y= k+i
-                texte = img.multiline_text((k,y), "N", fill=(0, 0, 0))
+        elif Xa==Xb:
+            y=Ya
+            while y<Yb:
+                texte = img.multiline_text((Xa,y), str(self.elementLocal), fill=(0, 0, 0))
+                y= y+10
+      
+                
             
-
-       
 
         #print("m : "+str(m)+" p : "+str(p))
 
@@ -86,5 +86,5 @@ class FigureNavon:
         return self.listeFiguresNavon
 
 
-F = FigureNavon("M","N")
+F = FigureNavon("V","I")
 F.creerFigureNavon()
