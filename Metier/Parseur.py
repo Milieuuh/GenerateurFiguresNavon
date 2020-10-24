@@ -20,8 +20,7 @@ class Parseur:
     def lireFichier(self):
         print("Lecture en cours du fichier")
 
-        #with open("../Templates/"+self.nomFichier, 'r') as fichier:
-        with open("Templates/"+self.nomFichier, 'r') as fichier:
+        with open("../Templates/"+self.nomFichier, 'r') as fichier:
             data = json.load(fichier)
 
         self.recupererPoints(data)
@@ -39,10 +38,11 @@ class Parseur:
 
         
         for nb in range(0,i):
-            self.listeCoordonnees.append(int(data['Droite '+ str(nb)]['Point Depart X']))
-            self.listeCoordonnees.append(int(data['Droite '+ str(nb)]['Point Depart Y']))
-            self.listeCoordonnees.append(int(data['Droite '+ str(nb)]['Point Arrive X']))
-            self.listeCoordonnees.append(int(data['Droite '+ str(nb)]['Point Arrive Y']))
+            if(data[str(nb)]["Type"]=="line"):
+                self.listeCoordonnees.append(int(data[''+str(nb)]['Xa']))
+                self.listeCoordonnees.append(int(data[''+str(nb)]['Ya']))
+                self.listeCoordonnees.append(int(data[''+str(nb)]['Xb']))
+                self.listeCoordonnees.append(int(data[''+str(nb)]['Yb']))
 
 
     def get(self, numero):

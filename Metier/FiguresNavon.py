@@ -80,15 +80,15 @@ class FigureNavon:
 
         
     ###############################################GETTER
-    def getElementGlobal():
+    def getElementGlobal(self):
         return self.elementGlobal
 
-    def getElementLocal():
+    def getElementLocal(self):
         return self.elementLocal
 
-    def getListeFiguresNavon():
+    def getListeFiguresNavon(self):
         return self.listeFiguresNavon
 
 
-#F = FigureNavon("M","N") 
-#F.creerFigureNavon()
+F = FigureNavon("Z","N") 
+F.creerFigureNavon()

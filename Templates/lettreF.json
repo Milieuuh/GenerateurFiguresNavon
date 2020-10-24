@@ -1,20 +1,23 @@
 {
-   "Droite 0": {
-	"Point Depart X": 0,
-	"Point Depart Y": 1,
-	"Point Arrive X": 70,
-	"Point Arrive Y":1
+   "0": {
+   	"Type": "line",
+	"Xa": 0,
+	"Ya": 1,
+	"Xb": 70,
+	"Yb":1
 	},
-	"Droite 1": {
-	"Point Depart X": 0,
-	"Point Depart Y": 50,
-	"Point Arrive X": 50,
-	"Point Arrive Y":50
+	"1": {
+   	"Type": "line",
+	"Xa": 0,
+	"Ya": 50,
+	"Xb": 50,
+	"Yb":50
 	},
-	"Droite 2": {
-	"Point Depart X": 0,
-	"Point Depart Y": 0,
-	"Point Arrive X": 0,
-	"Point Arrive Y":100
+	"2": {
+   	"Type": "line",
+	"Xa": 0,
+	"Ya": 0,
+	"Xb": 0,
+	"Yb":100
 	}
 }
