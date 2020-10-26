@@ -6,17 +6,18 @@ class FigureNavon:
     # ATTRIBUTS
     elementGlobal = ""
     elementLocal = ""
-    tailleGlobaleDeLaLettre = 0
+    hauteurLG = 0
+    largeurLG = 0
     listeFiguresNavon = []
     
 
     #CONSTRUCTEUR
-    def __init__(self, elementG, elementL, taille):
+    def __init__(self, elementG, elementL, hauteur,largeur):
         self.elementGlobal = elementG
         self.elementLocal = elementL
         self.tailleTotalDeLaLettre = 0
-        self.tailleGlobaleDeLaLettre=taille
-        
+        self.hauteurLG=hauteur
+        self.largeurLG=largeur
 
 
     #METHODES
