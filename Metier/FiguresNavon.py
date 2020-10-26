@@ -85,7 +85,7 @@ class FigureNavon:
         #image.save('nom')
         print("sauvegarde")
         
-
+    
         
     ###############################################GETTER
     def getElementGlobal(self):

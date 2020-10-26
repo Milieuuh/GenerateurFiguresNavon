@@ -2,6 +2,7 @@
 import tkinter
 from tkinter import *
 import tkinter.font as font
+from tkinter.filedialog import *
 
 import os
 import sys
@@ -9,20 +10,6 @@ import sys
 sys.path.append(os.path.abspath(".")+'\\Metier')
 
 from FiguresNavon import *
-
-
-
-#generer les fichiers png
-def generer():
-    res_LettreGlobale=s_lGlobale.get()
-    res_LettreLocale=s_lLocale.get()
-    res_hauteur=nb_hauteurGX.get()
-    res_largeur=nb_largeurGX.get()
-    print("appel de FigureNavon:")
-
-    maFigureNavon=FigureNavon(res_LettreGlobale,res_LettreLocale,res_hauteur,res_largeur)
-    maFigureNavon.creerFigureNavon()
-    
 
 
 #fenetrePrincipale
@@ -33,6 +20,26 @@ maFenetre.geometry("800x800")
 #typographie
 f=font.Font(family="Verdana",size=15)
 f_titre=font.Font(family="Verdana",size=20,weight="bold")
+
+
+#apercu les fichiers png
+def generer():
+    res_LettreGlobale=s_lGlobale.get()
+    res_LettreLocale=s_lLocale.get()
+    res_hauteur=nb_hauteurGX.get()
+    res_largeur=nb_largeurGX.get()
+    print("appel de FigureNavon:")
+
+    maFigureNavon=FigureNavon(res_LettreGlobale,res_LettreLocale,res_hauteur,res_largeur)
+    maFigureNavon.creerFigureNavon()
+    
+#sauvergarder fichier png
+def sauvegarde(): 
+
+    filepath = asksaveasfilename(initialdir="/",title="Enregistrer sous",filetypes=[('png files','*.png'),('jpeg files','*.jpg'),('all files','.*')])
+    print(filepath) 
+
+
 
 #--------------------------------------------------------------------- TITRE
 f_titre= tkinter.Frame(maFenetre, borderwidth=2, relief=GROOVE)
@@ -85,6 +92,9 @@ Label(f_tailleLG,text=" px").pack(side=LEFT)
 
 f_tailleLG.pack()
 
+
+
+
 #--------------------------------------------------------------------- BOUTON APERCU
 f_BOUTON = tkinter.Frame(lf_formeLettres,width=300, height=300, bd=10)
 
@@ -99,8 +109,11 @@ f_BOUTON.pack()
 #--------------------------------------------------------------------- BOUTON GENERER LE FICHIER
 lf_sauvegardeForme= tkinter.LabelFrame(maFenetre, text="Sauvegarder la/les figures de Navon",padx=5,pady=1)
 lf_sauvegardeForme.pack(fill="both",padx="10",pady="10",ipady="20",ipadx="10")
+
+
+
     #Bouton générer
-bt_Generer = tkinter.Button(lf_sauvegardeForme, relief=RAISED, bg="#32CD32", fg="WHITE",text="GENERER",command=generer)
+bt_Generer = tkinter.Button(lf_sauvegardeForme, relief=RAISED, bg="#32CD32", fg="WHITE",text="GENERER",command=sauvegarde)
 bt_Generer['font']=f
 bt_Generer.pack()
 
