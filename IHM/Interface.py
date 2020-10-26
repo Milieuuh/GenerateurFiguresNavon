@@ -16,9 +16,10 @@ from FiguresNavon import *
 def generer():
     res_LettreGlobale=s_lGlobale.get()
     res_LettreLocale=s_lLocale.get()
-    print("appel de FigureNavon : ")
+    res_Taille=nb_tailleGX.get()
+    print("appel de FigureNavon:")
 
-    maFigureNavon=FigureNavon(res_LettreGlobale,res_LettreLocale)
+    maFigureNavon=FigureNavon(res_LettreGlobale,res_LettreLocale,res_Taille)
     maFigureNavon.creerFigureNavon()
     
 
