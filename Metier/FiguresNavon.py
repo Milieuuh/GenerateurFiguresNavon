@@ -15,7 +15,7 @@ class FigureNavon:
     def __init__(self, elementG, elementL, hauteur,largeur):
         self.elementGlobal = elementG
         self.elementLocal = elementL
-        self.tailleTotalDeLaLettre = 0
+        self.mesureTailleSegments = 0
         self.hauteurLG=hauteur
         self.largeurLG=largeur
 
@@ -41,9 +41,18 @@ class FigureNavon:
         img_figure_navon.show()
         #self.sauvegarderFigure(img1)
 
-    def calculTailleTotaleLettre(self, Xa, Ya, Xb, Yb):
+    def calculMesureTailleSegments(self, Xa, Ya, Xb, Yb):
         print("calcul taille de la lettre")
-        self.tailleTotalDeLaLettre = self.tailleTotalDeLaLettre +((Ya-Xa)**2 +(Yb-Xb)**2)**(1/2) 
+        self.mesureTailleSegments = self.mesureTailleSegments +((Ya-Xa)**2 +(Yb-Xb)**2)**(1/2) 
+        
+
+    def calculEquationDroite(self, Xa, Ya, Xb, Yb, img):
+        m= (Yb-Ya)/(Xb-Xa)
+        p= Ya - Xa*m
+        i=Xa
+        for i in range(Xa, Xb, 10):
+            y= m*i+p
+            texte = img.multiline_text((i,y), str(self.elementLocal), fill=(0, 0, 0))
         
 
     def placementElementsLocaux(self, Xa, Ya, Xb, Yb, img):
@@ -51,21 +60,9 @@ class FigureNavon:
             #coeff directeur m et de p
         if Xb-Xa!=0:
             if Xb>Xa:
-                m= (Yb-Ya)/(Xb-Xa)
-                p= Ya - Xa*m
-
-                i=Xa
-                for i in range(Xa, Xb, 10):
-                    y= m*i+p
-                    texte = img.multiline_text((i,y), str(self.elementLocal), fill=(0, 0, 0))
+               self.calculEquationDroite(Xa, Ya, Xb, Yb, img)
             else:
-                m= (Ya-Yb)/(Xa-Xb)
-                p= Ya - Xa*m
-
-                i=Xa
-                for i in range(Xb, Xa, 10):
-                    y= m*i+p
-                    texte = img.multiline_text((i,y), str(self.elementLocal), fill=(0, 0, 0))
+                self.calculEquationDroite(Xb, Yb, Xa, Ya, img)
 
             #x=k, k étant une constante
         elif Xa==Xb:
@@ -73,11 +70,11 @@ class FigureNavon:
             while y<Yb:
                 texte = img.multiline_text((Xa,y), str(self.elementLocal), fill=(0, 0, 0))
                 y= y+10
-      
-        self.calculTailleTotaleLettre(Xa, Ya, Xb, Yb)
-        print(self.tailleTotalDeLaLettre)
-        
-        
+
+        self.calculMesureTailleSegments(Xa, Ya, Xb, Yb)
+        print(self.mesureTailleSegments)
+
+
     def ajouterFigureNavon(newFigureNavon):
         listeFiguresNavon.append(newFigureNavon)
 
