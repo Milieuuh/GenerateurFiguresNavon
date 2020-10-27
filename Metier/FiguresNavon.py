@@ -6,18 +6,16 @@ class FigureNavon:
     # ATTRIBUTS
     elementGlobal = ""
     elementLocal = ""
-    hauteurLG = 0
-    largeurLG = 0
+    tailleLG = 0
     listeFiguresNavon = []
     
 
     #CONSTRUCTEUR
-    def __init__(self, elementG, elementL, hauteur,largeur):
+    def __init__(self, elementG, elementL, taille, largueur):
         self.elementGlobal = elementG
         self.elementLocal = elementL
         self.mesureTailleSegments = 0
-        self.hauteurLG=hauteur
-        self.largeurLG=largeur
+        self.tailleLG=taille
 
 
     #METHODES
@@ -34,7 +32,7 @@ class FigureNavon:
 
         i=0
         while i<len(self.parser.getListeCoordonnees()):
-             self.placementElementsLocaux(self.parser.get(i), self.parser.get(i+1), self.parser.get(i+2), self.parser.get(i+3), img1)
+             self.placementElementsLocaux(self.parser.get(i)*self.tailleLG//100, self.parser.get(i+1)*self.tailleLG//100, self.parser.get(i+2)*self.tailleLG//100, self.parser.get(i+3)*self.tailleLG//100, img1)
              i=i+4
             
        
@@ -69,7 +67,7 @@ class FigureNavon:
             y=Ya
             while y<Yb:
                 texte = img.multiline_text((Xa,y), str(self.elementLocal), fill=(0, 0, 0))
-                y= y+10
+                y= y+10.00
 
         self.calculMesureTailleSegments(Xa, Ya, Xb, Yb)
         print(self.mesureTailleSegments)
