@@ -11,7 +11,7 @@ class FigureNavon:
     
 
     #CONSTRUCTEUR
-    def __init__(self, elementG, elementL, taille, largueur):
+    def __init__(self, elementG, elementL, taille):
         self.elementGlobal = elementG
         self.elementLocal = elementL
         self.mesureTailleSegments = 0

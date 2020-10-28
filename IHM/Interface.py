@@ -27,10 +27,9 @@ def generer():
     res_LettreGlobale=s_lGlobale.get()
     res_LettreLocale=s_lLocale.get()
     res_hauteur=nb_hauteurGX.get()
-    res_largeur=nb_largeurGX.get()
     print("appel de FigureNavon:")
 
-    maFigureNavon=FigureNavon(res_LettreGlobale,res_LettreLocale,res_hauteur,res_largeur)
+    maFigureNavon=FigureNavon(res_LettreGlobale,res_LettreLocale,res_hauteur)
     maFigureNavon.creerFigureNavon()
     
 #sauvergarder fichier png
@@ -75,20 +74,13 @@ f_formeLettres.pack()
 f_tailleLG = tkinter.Frame(lf_formeLettres,width=300, height=300, bd=10)
    
 nb_hauteurGX = tkinter.IntVar()
-nb_hauteurGX.set(800)
-Label(f_tailleLG,text="Hauteur lettre globale : ").pack(side=LEFT)
+nb_hauteurGX.set(400)
+Label(f_tailleLG,text="Taille lettre globale : ").pack(side=LEFT)
 champ_tailleGX = tkinter.Entry(f_tailleLG,textvariable=nb_hauteurGX, bg="white", width="10")
 champ_tailleGX.pack(side=LEFT)
 Label(f_tailleLG,text=" px").pack(side=LEFT)
 
 
-
-nb_largeurGX = tkinter.IntVar()
-nb_largeurGX.set(400)
-Label(f_tailleLG,text="Largeur lettre globale : ").pack(side=LEFT)
-champ_hauteurGX = tkinter.Entry(f_tailleLG,textvariable=nb_largeurGX, bg="white", width="10")
-champ_hauteurGX.pack(side=LEFT)
-Label(f_tailleLG,text=" px").pack(side=LEFT)
 
 f_tailleLG.pack()
 
