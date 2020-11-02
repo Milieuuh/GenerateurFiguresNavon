@@ -21,6 +21,7 @@ maFenetre.geometry("800x800")
 f=font.Font(family="Verdana",size=15)
 f_titre=font.Font(family="Verdana",size=20,weight="bold")
 
+maFigureNavon = FigureNavon("A", "B", 400, 20)
 
 #apercu les fichiers png
 def generer():
@@ -30,7 +31,10 @@ def generer():
     res_caract=nb_caract.get()
     print("appel de FigureNavon:")
 
-    maFigureNavon=FigureNavon(res_LettreGlobale,res_LettreLocale,res_hauteur, res_caract)
+    maFigureNavon.setElementGlobal(res_LettreGlobale)
+    maFigureNavon.setElementLocal(res_LettreLocale)
+    maFigureNavon.setTailleLG(res_hauteur)
+    maFigureNavon.setNbCaractereLocaux(res_caract)
     maFigureNavon.creerFigureNavon()
     
 #sauvergarder fichier png
@@ -43,7 +47,7 @@ def sauvegarde():
     filepath = asksaveasfilename(initialdir="/",title="Save as",filetypes=[('png files','*.png'),('jpeg files','*.jpg'),('all files','.*')])
     print(filepath)
 
-    maFigureNavon = FigureNavon(res_LettreGlobale, res_LettreLocale, res_hauteur, res_caract)
+    #maFigureNavon = FigureNavon(res_LettreGlobale, res_LettreLocale, res_hauteur, res_caract)
     maFigureNavon.creerFigureNavon()
     #maFigureNavon.sauvegarderFigure(filepath)
 

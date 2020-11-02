@@ -8,7 +8,7 @@ class FigureNavon:
     elementLocal = ""
     tailleLG = 0
     fichier = ""
-    
+    nbCaracteresLocaux=0
     
 
     #CONSTRUCTEUR
@@ -117,6 +117,26 @@ class FigureNavon:
 
     def getNomFichier(self):
         return self.fichier
+
+    def getTailleLG(self):
+        return self.tailleLG
+
+    def getNbCaractere(self):
+        return self.nbCaracteresLocaux
+
+    ###############################################SETTER
+    def setElementGlobal(self, elmt):
+        self.elementGlobal=elmt
+
+    def setElementLocal(self,elmt):
+        self.elementLocal=elmt
+
+    def setTailleLG(self,elmt):
+        self.tailleLG
+
+    def setNbCaractereLocaux(self,nb):
+        self.nbCaracteresLocaux=nb
+
 
 #F = FigureNavon("L","N") 
 #F.creerFigureNavon()
