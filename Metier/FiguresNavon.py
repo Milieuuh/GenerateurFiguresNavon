@@ -8,7 +8,7 @@ class FigureNavon:
     elementLocal = ""
     tailleLG = 0
     densite=0
-    listeFiguresNavon = []
+
     
     
 
@@ -22,6 +22,7 @@ class FigureNavon:
         self.valeurMoyenneDeSymboles = 0
         self.nombreDeSegmentsDansLettre = 0
         self.listeTailleDesSegment = []
+        self.listeFiguresNavon = []
 
 
     #METHODES
@@ -35,7 +36,7 @@ class FigureNavon:
 
     def creerFigureNavon(self):
         print("creation Figure")
-        self.parser = Parseur.Parseur("lettre"+self.elementGlobal+".json", elementGlobal)
+        self.parser = Parseur.Parseur("lettre"+self.elementGlobal+".json", self.elementGlobal)
         self.parser.lireFichier()
 
         #creation de l'image
@@ -90,10 +91,8 @@ class FigureNavon:
                 texte = img.multiline_text((Xa,y), str(self.elementLocal), fill=(0, 0, 0))
                 y= y+10#(self.valeurMoyenneDeSymboles/self.nombreDeSegmentsDansLettre)/2
 
-
-
-    def ajouterFigureNavon(newFigureNavon):
-        listeFiguresNavon.append(newFigureNavon)
+    def ajouterFigureNavon(self, newFigureNavon):
+        self.listeFiguresNavon.append(newFigureNavon)
 
     def sauvegarderFigure(image):
         #image.save('nom')
