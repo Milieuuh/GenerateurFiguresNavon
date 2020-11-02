@@ -68,7 +68,7 @@ class FigureNavon:
         ecart = self.mesureTailleSegments/self.nbCaracteresLocaux
         while i<Xb:
             y= m*i+p
-            texte = img.multiline_text((i,y), str(self.elementLocal), fill=(0, 255, 0))
+            texte = img.multiline_text((i,y), str(self.elementLocal), fill=(0, 0, 0))
             i=i+ecart
         
 
