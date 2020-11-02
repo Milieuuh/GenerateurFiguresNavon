@@ -34,14 +34,13 @@ def generer():
     maFigureNavon.creerFigureNavon()
     
 #sauvergarder fichier png
-def sauvegarde(): 
-
+def sauvegarde():
     filepath = asksaveasfilename(initialdir="/",title="Save as",filetypes=[('png files','*.png'),('jpeg files','*.jpg'),('all files','.*')])
     print(filepath)
 
 def charge():
-    filepath = askopenfilename(initialdir="/",title="Open as",filetypes=[('png files','*.png'),('jpeg files','*.jpg'),('all files','.*')])
-
+    filepath = askopenfilename(initialdir="/",title="Open as",filetypes=[('txt files','*.txt')])
+    Label(lf_chargerFichier, text=filepath).pack(side=LEFT)
 
 
 #--------------------------------------------------------------------- TITRE
@@ -114,15 +113,15 @@ lf_chargerFichier.pack(fill="both",padx="10",pady="10",ipady="20",ipadx="10")
 
     #bouton charger fichier
 bt_Charge = tkinter.Button(lf_chargerFichier, relief=RAISED, bg="#32CD32", fg="WHITE",text="Load",command=charge)
-
 bt_Charge['font']=f
 bt_Charge.pack()
 
+    #texte et affichage de l'adresse
+Label(lf_chargerFichier,text="File load : ").pack(side=LEFT)
 
 #--------------------------------------------------------------------- BOUTON GENERER LE FICHIER
 lf_sauvegardeForme= tkinter.LabelFrame(maFenetre, text="Save",padx=5,pady=1)
 lf_sauvegardeForme.pack(fill="both",padx="10",pady="10",ipady="20",ipadx="10")
-
 
 
     #Bouton générer
