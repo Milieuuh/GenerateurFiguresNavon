@@ -36,8 +36,11 @@ def generer():
 #sauvergarder fichier png
 def sauvegarde(): 
 
-    filepath = asksaveasfilename(initialdir="/",title="Enregistrer sous",filetypes=[('png files','*.png'),('jpeg files','*.jpg'),('all files','.*')])
-    print(filepath) 
+    filepath = asksaveasfilename(initialdir="/",title="Save as",filetypes=[('png files','*.png'),('jpeg files','*.jpg'),('all files','.*')])
+    print(filepath)
+
+def charge():
+    filepath = askopenfilename(initialdir="/",title="Open as",filetypes=[('png files','*.png'),('jpeg files','*.jpg'),('all files','.*')])
 
 
 
@@ -105,6 +108,16 @@ bt_Apercu.pack()
 
 
 f_BOUTON.pack()
+
+#--------------------------------------------------------------------- BOUTON OUVRIR FICHIER PRE-EXISTANT
+lf_chargerFichier= tkinter.LabelFrame(maFenetre, text="Load File", padx=5,pady=1)
+lf_chargerFichier.pack(fill="both",padx="10",pady="10",ipady="20",ipadx="10")
+
+    #bouton charger fichier
+bt_Charge = tkinter.Button(lf_chargerFichier, relief=RAISED, bg="#32CD32", fg="WHITE",text="Load",command=charge)
+
+bt_Charge['font']=f
+bt_Charge.pack()
 
 
 #--------------------------------------------------------------------- BOUTON GENERER LE FICHIER
