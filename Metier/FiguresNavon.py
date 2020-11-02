@@ -12,6 +12,9 @@ class FigureNavon:
     
 
     #CONSTRUCTEUR
+    def __init__(self):
+        print("costructeur")
+
     def __init__(self, elementG, elementL, taille, nbCaracteresLocaux):
         self.elementGlobal = elementG
         self.elementLocal = elementL
@@ -59,6 +62,8 @@ class FigureNavon:
             
        
         img_figure_navon.show()
+
+        return img_figure_navon
         #self.sauvegarderFigure(img_figure_navon)
 
  
