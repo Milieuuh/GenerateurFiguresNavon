@@ -27,10 +27,10 @@ def generer():
     res_LettreGlobale=s_lGlobale.get()
     res_LettreLocale=s_lLocale.get()
     res_hauteur=nb_hauteurGX.get()
-    res_densite=nb_densite.get()
+    res_caract=nb_caract.get()
     print("appel de FigureNavon:")
 
-    maFigureNavon=FigureNavon(res_LettreGlobale,res_LettreLocale,res_hauteur, res_densite)
+    maFigureNavon=FigureNavon(res_LettreGlobale,res_LettreLocale,res_hauteur, res_caract)
     maFigureNavon.creerFigureNavon()
     
 #sauvergarder fichier png
@@ -86,15 +86,14 @@ Label(f_tailleLG,text=" px").pack(side=LEFT)
 
 f_tailleLG.pack()
 
-#------------------------------------------------------DENSITE 
+#------------------------------------------------------Nombre local de caractères
 f_densite = tkinter.Frame(lf_formeLettres,width=300, height=300, bd=10)
 
-nb_densite = tkinter.DoubleVar()
-nb_densite.set(0.5)
-Label(f_densite,text="Density : ").pack(side=LEFT)
-champ_densite = tkinter.Entry(f_densite,textvariable=nb_densite, bg="white", width="10")
+nb_caract = tkinter.IntVar()
+nb_caract.set(20)
+Label(f_densite,text="Number Local Characters : ").pack(side=LEFT)
+champ_densite = tkinter.Entry(f_densite,textvariable=nb_caract, bg="white", width="10")
 champ_densite.pack(side=LEFT)
-Label(f_densite,text=" (Between 0 and 1)").pack(side=LEFT)
 
 f_densite.pack()
 
