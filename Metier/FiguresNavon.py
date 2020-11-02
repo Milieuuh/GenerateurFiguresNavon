@@ -58,7 +58,7 @@ class FigureNavon:
             
        
         img_figure_navon.show()
-        #self.sauvegarderFigure(img1)
+        #self.sauvegarderFigure(img_figure_navon)
 
  
     def calculEquationDroite(self, Xa, Ya, Xb, Yb, img):
@@ -92,8 +92,8 @@ class FigureNavon:
     def ajouterFigureNavon(self, newFigureNavon):
         self.listeFiguresNavon.append(newFigureNavon)
 
-    def sauvegarderFigure(image):
-        #image.save('nom')
+    def sauvegarderFigure(self, image):
+        image.save('nom.png')
         print("sauvegarde")
         
     
