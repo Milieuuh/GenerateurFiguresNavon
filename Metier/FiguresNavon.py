@@ -7,6 +7,7 @@ class FigureNavon:
     elementGlobal = ""
     elementLocal = ""
     tailleLG = 0
+    fichier = ""
     
     
 
@@ -95,8 +96,9 @@ class FigureNavon:
     def sauvegarderFigure(self, image):
         image.save('nom.png')
         print("sauvegarde")
-        
-    
+
+    def chargerFigure(self, fichier):
+        self.fichier=fichier
         
     ###############################################GETTER
     def getElementGlobal(self):
@@ -108,6 +110,8 @@ class FigureNavon:
     def getListeFiguresNavon(self):
         return self.listeFiguresNavon
 
+    def getNomFichier(self):
+        return self.fichier
 
 #F = FigureNavon("L","N") 
 #F.creerFigureNavon()

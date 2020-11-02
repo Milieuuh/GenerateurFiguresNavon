@@ -35,12 +35,24 @@ def generer():
     
 #sauvergarder fichier png
 def sauvegarde():
+    res_LettreGlobale = s_lGlobale.get()
+    res_LettreLocale = s_lLocale.get()
+    res_hauteur = nb_hauteurGX.get()
+    res_caract = nb_caract.get()
+
     filepath = asksaveasfilename(initialdir="/",title="Save as",filetypes=[('png files','*.png'),('jpeg files','*.jpg'),('all files','.*')])
     print(filepath)
+
+    maFigureNavon = FigureNavon(res_LettreGlobale, res_LettreLocale, res_hauteur, res_caract)
+    maFigureNavon.creerFigureNavon()
+    #maFigureNavon.sauvegarderFigure(filepath)
+
 
 def charge():
     filepath = askopenfilename(initialdir="/",title="Open as",filetypes=[('txt files','*.txt')])
     Label(lf_chargerFichier, text=filepath).pack(side=LEFT)
+    maFigureNavon = FigureNavon("A", "B", 800, 20)
+    maFigureNavon.chargerFigure(filepath)
 
 
 #--------------------------------------------------------------------- TITRE
