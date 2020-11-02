@@ -9,6 +9,7 @@ class FigureNavon:
     tailleLG = 0
     listeFiguresNavon = []
     
+    
 
     #CONSTRUCTEUR
     def __init__(self, elementG, elementL, taille):
@@ -19,13 +20,15 @@ class FigureNavon:
         self.densite = 0.5
         self.valeurMoyenneDeSymboles = 0
         self.nombreDeSegmentsDansLettre = 0
+        self.listeTailleDesSegment = []
 
 
     #METHODES
 
     def calculMesureTailleSegments(self, Xa, Ya, Xb, Yb):
         print("calcul taille de la lettre")
-        self.mesureTailleSegments = self.mesureTailleSegments +((Ya-Xa)**2 +(Yb-Xb)**2)**(1/2) 
+        self.mesureTailleSegments = self.mesureTailleSegments +((Ya-Xa)**2 +(Yb-Xb)**2)**(1/2)
+        self.listeTailleDesSegment.append(((Ya-Xa)**2 +(Yb-Xb)**2)**(1/2))
         
 
 
@@ -66,7 +69,7 @@ class FigureNavon:
         while i<Xb:
             y= m*i+p
             texte = img.multiline_text((i,y), str(self.elementLocal), fill=(0, 255, 0))
-            i=i+(self.valeurMoyenneDeSymboles//self.nombreDeSegmentsDansLettre)/2
+            i=i+10#+(self.valeurMoyenneDeSymboles//self.nombreDeSegmentsDansLettre)/2
         
 
     def placementElementsLocaux(self, Xa, Ya, Xb, Yb, img):        
@@ -84,7 +87,7 @@ class FigureNavon:
             self.valeurMoyenneDeSymboles = self.densite * self.mesureTailleSegments
             while y<Yb:
                 texte = img.multiline_text((Xa,y), str(self.elementLocal), fill=(0, 0, 0))
-                y= y+(self.valeurMoyenneDeSymboles/self.nombreDeSegmentsDansLettre)/2
+                y= y+10#(self.valeurMoyenneDeSymboles/self.nombreDeSegmentsDansLettre)/2
 
 
 
