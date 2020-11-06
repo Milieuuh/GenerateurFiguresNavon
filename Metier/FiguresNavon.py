@@ -38,7 +38,7 @@ class FigureNavon:
 
     def creerFigureNavon(self):
         print("creation Figure")
-        self.parser = Parseur.Parseur("lettre"+self.elementGlobal+".json", self.elementGlobal)
+        self.parser = Parseur.Parseur(self.elementGlobal+".json", self.elementGlobal)
         self.parser.lireFichier()
 
         #creation de l'image
