@@ -1,6 +1,10 @@
 import elementGlobal, elementLocal, Parseur
+import matplotlib
 from PIL import Image, ImageDraw
+from PIL import *
 from math import *
+from matplotlib.patches import *
+import matplotlib.pyplot as plt
 
 class FigureNavon:
 
@@ -63,9 +67,24 @@ class FigureNavon:
              self.placementElementsLocaux(self.parser.get(i)*self.tailleLG//100, self.parser.get(i+1)*self.tailleLG//100, self.parser.get(i+2)*self.tailleLG//100, self.parser.get(i+3)*self.tailleLG//100, img1, compteur)
              compteur = compteur + 1
              i = i+4
+
+        i=0
+        for index in self.parser.getListeCurve():
+            print(index)
+
+        while i < len(self.parser.getListeCurve()):
+            self.dessiner(self.parser.getElementCurve(i) * self.tailleLG // 100,
+                                         self.parser.getElementCurve(i + 1) * self.tailleLG // 100,
+                                         self.parser.getElementCurve(i + 2) * self.tailleLG // 100,
+                                         self.parser.getElementCurve(i + 3),
+                                         self.parser.getElementCurve(i + 4), img1)
+            compteur = compteur + 1
+            i = i + 5
+
+
        
         img_figure_navon.show()
-        self.mesureTailleSegments =0;
+        self.mesureTailleSegments =0
         self.listeTailleDesSegments = []
 
         return img_figure_navon
@@ -104,6 +123,13 @@ class FigureNavon:
             while y <self.listeTailleDesSegments[numSegment]:
                 img.multiline_text((Xa, y), str(self.elementLocal), fill=(0, 0, 0))
                 y= y+ecart
+
+    def dessiner(self, X, Y, width, height, angle, img):
+        print("dessiner un arc de cercle")
+        img.arc([(X, Y), (width,width)], 0, 360, fill=(255,0,0))
+
+        #img.ellipse(X, Y, width, height, angle)
+
 
     def ajouterFigureNavon(self, newFigureNavon):
         self.listeFiguresNavon.append(newFigureNavon)

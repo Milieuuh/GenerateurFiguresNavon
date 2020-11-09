@@ -12,6 +12,7 @@ class Parseur:
         self.nomFichier=nomFile
         self.elementGlobal = elementG
         self.listeCoordonnees = []
+        self.listeCurve = []
 
 
     #METHODES
@@ -45,24 +46,29 @@ class Parseur:
                 self.listeCoordonnees.append(int(data[''+str(nb)]['Xb']))
                 self.listeCoordonnees.append(int(data[''+str(nb)]['Yb']))
             if(data[str(nb)]["Type"]=="curve"):
-                self.listeCoordonnees.append(float(data['' + str(nb)]['X']))
-                self.listeCoordonnees.append(float(data['' + str(nb)]['Y']))
-                self.listeCoordonnees.append(float(data['' + str(nb)]['width']))
-                self.listeCoordonnees.append(float(data['' + str(nb)]['height']))
-                self.listeCoordonnees.append(float(data['' + str(nb)]['angle']))
+                self.listeCurve.append(float(data['' + str(nb)]['X']))
+                self.listeCurve.append(float(data['' + str(nb)]['Y']))
+                self.listeCurve.append(float(data['' + str(nb)]['width']))
+                self.listeCurve.append(float(data['' + str(nb)]['height']))
+                self.listeCurve.append(float(data['' + str(nb)]['angle']))
                 #https://matplotlib.org/3.1.0/api/_as_gen/matplotlib.patches.Arc.html
 
 
     def get(self, numero):
-            return self.listeCoordonnees[numero]
+        return self.listeCoordonnees[numero]
 
+    def getElementCurve(self, numero):
+        return self.listeCurve[numero]
         
     ##############################GETTER
-    def getNomFichier():
+    def getNomFichier(self):
         return self.nomFichier
 
     def getListeCoordonnees(self):
         return self.listeCoordonnees
+
+    def getListeCurve(self):
+        return self.listeCurve
 
 
     
