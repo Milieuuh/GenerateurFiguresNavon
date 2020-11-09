@@ -50,6 +50,7 @@ class Parseur:
                 self.listeCoordonnees.append(float(data['' + str(nb)]['width']))
                 self.listeCoordonnees.append(float(data['' + str(nb)]['height']))
                 self.listeCoordonnees.append(float(data['' + str(nb)]['angle']))
+                #https://matplotlib.org/3.1.0/api/_as_gen/matplotlib.patches.Arc.html
 
 
     def get(self, numero):
