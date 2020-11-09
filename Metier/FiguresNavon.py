@@ -16,12 +16,12 @@ class FigureNavon:
     def __init__(self):
         print("costructeur")
 
-    def __init__(self, elementG, elementL, taille, nbCaracteresLocaux):
+    def __init__(self, elementG, elementL, taille, densite):
         self.elementGlobal = elementG
         self.elementLocal = elementL
         self.mesureTailleSegments = 0
         self.tailleLG=taille
-        self.densite = nbCaracteresLocaux
+        self.densite = densite
         self.valeurMoyenneDeSymboles = 0
         self.nombreDeSegmentsDansLettre = 0
         self.listeTailleDesSegments = []
@@ -146,4 +146,8 @@ class FigureNavon:
 
     def setNbCaractereLocaux(self,nb):
         self.nbCaracteresLocaux=nb
+
+    def setDensite(self,nb):
+        self.densite;
+
 
