@@ -7,10 +7,11 @@
 	"Yb":100
      },
      "1":{
-      "Type":"curve",
-	"Xa": 0,
-	"Ya": 0,
-	"Xb": 0,
-	"Yb": 50
-     },
+      	"Type":"curve",
+	"X": 0,
+	"Y": 25,
+	"width": 40,
+	"height": 50,
+	"angle": 0
+     }
 }

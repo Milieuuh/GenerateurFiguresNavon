@@ -8,16 +8,18 @@
      },
      "1":{
 	"Type":"curve",
-	"Xa": 0,
-	"Ya": 1,
-	"Xb": 0,
-	"Yb":50
+	"X": 0,
+	"Y": 25,
+	"width": 40,
+	"height": 50,
+	"angle": 0.45
      },
      "2":{
 	"Type":"curve",
-	"Xa": 0,
-	"Ya": 50,
-	"Xb": 0,
-	"Yb":100
+	"X": 0,
+	"Y": 75,
+	"width": 0,
+	"height":100,
+	"angle": 0.45
      }
 }

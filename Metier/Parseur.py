@@ -44,6 +44,12 @@ class Parseur:
                 self.listeCoordonnees.append(int(data[''+str(nb)]['Ya']))
                 self.listeCoordonnees.append(int(data[''+str(nb)]['Xb']))
                 self.listeCoordonnees.append(int(data[''+str(nb)]['Yb']))
+            if(data[str(nb)]["Type"]=="curve"):
+                self.listeCoordonnees.append(float(data['' + str(nb)]['X']))
+                self.listeCoordonnees.append(float(data['' + str(nb)]['Y']))
+                self.listeCoordonnees.append(float(data['' + str(nb)]['width']))
+                self.listeCoordonnees.append(float(data['' + str(nb)]['height']))
+                self.listeCoordonnees.append(float(data['' + str(nb)]['angle']))
 
 
     def get(self, numero):
