@@ -21,20 +21,21 @@ class FigureNavon:
         self.elementLocal = elementL
         self.mesureTailleSegments = 0
         self.tailleLG=taille
-        self.nbCaracteresLocaux = nbCaracteresLocaux
+        self.densite = nbCaracteresLocaux
         self.valeurMoyenneDeSymboles = 0
         self.nombreDeSegmentsDansLettre = 0
         self.listeTailleDesSegments = []
         self.listeFiguresNavon = []
+        self.taillePoliceElementlocal = 15
 
 
     #METHODES
 
     def calculMesureTailleSegments(self, Xa, Ya, Xb, Yb):
         print("calcul taille de la lettre")
-        self.mesureTailleSegments = self.mesureTailleSegments +((Ya-Xa)**2 +(Yb-Xb)**2)**(1/2)
-        print(((Ya-Xa)**2 +(Yb-Xb)**2)**(1/2))
-        self.listeTailleDesSegments.append(((Ya-Xa)**2 +(Yb-Xb)**2)**(1/2))
+        self.mesureTailleSegments = self.mesureTailleSegments +((Xb-Xa)**2 +(Yb-Ya)**2)**(1/2)
+        print(((Xb-Xa)**2 +(Yb-Ya)**2)**(1/2))
+        self.listeTailleDesSegments.append(((Xb-Xa)**2 +(Yb-Ya)**2)**(1/2))
         
 
 
@@ -62,10 +63,10 @@ class FigureNavon:
              self.placementElementsLocaux(self.parser.get(i)*self.tailleLG//100, self.parser.get(i+1)*self.tailleLG//100, self.parser.get(i+2)*self.tailleLG//100, self.parser.get(i+3)*self.tailleLG//100, img1, compteur)
              compteur = compteur + 1
              i = i+4
-
-            
        
         img_figure_navon.show()
+        self.mesureTailleSegments =0;
+        self.listeTailleDesSegments = []
 
         return img_figure_navon
         #self.sauvegarderFigure(img_figure_navon)
@@ -75,12 +76,14 @@ class FigureNavon:
         m= (Yb-Ya)/(Xb-Xa)
         p= Ya - Xa*m
         i=Xa
-        nb = ceil(self.listeTailleDesSegments[numSegment])*self.nbCaracteresLocaux/self.mesureTailleSegments
-        ecart = ceil(self.listeTailleDesSegments[numSegment])/nb
-        while i<Xa+ceil(self.listeTailleDesSegments[numSegment]):
+
+        nbElementsLocaux = self.densite * self.mesureTailleSegments / self.taillePoliceElementlocal
+        nbElementSurMonSegment = (nbElementsLocaux * self.listeTailleDesSegments[numSegment]*self.densite)/ (self.mesureTailleSegments * self.densite)
+        ecart = (self.listeTailleDesSegments[numSegment]*self.densite) / nbElementSurMonSegment
+        while i<Xb:
             y= m*i+p
             img.multiline_text((i, y), str(self.elementLocal), fill=(0, 0, 0))
-            i = i+int(ecart)
+            i = i+ecart
         
 
     def placementElementsLocaux(self, Xa, Ya, Xb, Yb, img, numSegment):
@@ -93,13 +96,14 @@ class FigureNavon:
                 self.calculEquationDroite(Xb, Yb, Xa, Ya, img, numSegment)
 
             #x=k, k étant une constante
-        elif Xa == Yb:
+        elif Xa == Xb:
             y=Ya
-            nb = ceil(self.listeTailleDesSegments[numSegment]) * self.nbCaracteresLocaux / self.mesureTailleSegments
-            ecart = ceil(self.listeTailleDesSegments[numSegment]) / ceil(nb)
-            while y < Ya+ceil(self.listeTailleDesSegments[numSegment]):
+            nbElementsLocaux = self.densite * self.mesureTailleSegments / self.taillePoliceElementlocal
+            nbElementSurMonSegment = (nbElementsLocaux * self.listeTailleDesSegments[numSegment] * self.densite) / (self.mesureTailleSegments * self.densite)
+            ecart = (self.listeTailleDesSegments[numSegment] * self.densite) / nbElementSurMonSegment
+            while y <self.listeTailleDesSegments[numSegment]:
                 img.multiline_text((Xa, y), str(self.elementLocal), fill=(0, 0, 0))
-                y= y+int(ecart)
+                y= y+ecart
 
     def ajouterFigureNavon(self, newFigureNavon):
         self.listeFiguresNavon.append(newFigureNavon)
