@@ -1,18 +1,19 @@
 {
     "0":{
 	"Type":"line",
-	"Xa": 10,
+	"Xa": 0,
 	"Ya": 0,
-	"Xb": 10,
+	"Xb": 0,
 	"Yb": 30
      },
      "1":{
 	"Type":"curve",
-	"X": 25,
-	"Y": 100,
-	"width": 50,
-	"height": 40,
-	"angle": 0
+	"X1": 0,
+	"Y1": 0,
+	"X2": 70,
+	"Y2": 70,
+	"angleDepart": 360,
+	"angleArrive": 180
      },
      "2":{
 	"Type":"line",

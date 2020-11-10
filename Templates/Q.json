@@ -1,24 +1,26 @@
 {
     "0":{
 	"Type":"curve",
-	"X": 0,
-	"Y": 50,
-	"width": 40,
-	"height": 100,
-	"angle": 0.75
+	"X1": 0,
+	"Y1": 0,
+	"X2": 100,
+	"Y2": 100,
+	"angleDepart": 270,
+	"angleArrive": 90
      },
      "1":{
 	"Type":"curve",
-	"X": 100,
-	"Y": 50,
-	"width": 40,
-	"height": 100,
-	"angle": 0.45
+	"X1": 0,
+	"Y1": 0,
+	"X2": 100,
+	"Y2": 100,
+	"angleDepart": 90,
+	"angleArrive": 270
       },
       "2":{
 	"Type":"line",
-	"Xa": 50,
-	"Ya": 50,
+	"Xa": 70,
+	"Ya": 70,
 	"Xb": 100,
 	"Yb": 100
      }

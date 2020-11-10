@@ -76,10 +76,11 @@ class FigureNavon:
             self.dessiner(self.parser.getElementCurve(i) * self.tailleLG // 100,
                                          self.parser.getElementCurve(i + 1) * self.tailleLG // 100,
                                          self.parser.getElementCurve(i + 2) * self.tailleLG // 100,
-                                         self.parser.getElementCurve(i + 3),
-                                         self.parser.getElementCurve(i + 4), img1)
+                                         self.parser.getElementCurve(i + 3) * self.tailleLG // 100,
+                                         self.parser.getElementCurve(i + 4),
+                                         self.parser.getElementCurve(i + 5), img1)
             compteur = compteur + 1
-            i = i + 5
+            i = i + 6
 
 
        
@@ -124,9 +125,13 @@ class FigureNavon:
                 img.multiline_text((Xa, y), str(self.elementLocal), fill=(0, 0, 0))
                 y= y+ecart
 
-    def dessiner(self, X, Y, width, height, angle, img):
+    def dessiner(self, X1, Y1,X2, Y2, angleDepart, angleArrive, img):
         print("dessiner un arc de cercle")
-        img.arc([(X, Y), (width,width)], 0, 360, fill=(255,0,0))
+
+        #img.arc([(X, Y), (width,width)], 0, 360, fill=(255,0,0))
+
+        img.arc([(X1, Y1), (X2, Y2)], angleDepart, angleArrive, fill=(255, 0, 0))
+        #img.arc([(50, 50), (50, 50)], 90, 270, fill=(255, 0, 0))
 
         #img.ellipse(X, Y, width, height, angle)
 

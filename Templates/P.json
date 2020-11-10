@@ -8,10 +8,25 @@
      },
      "1":{
       	"Type":"curve",
-	"X": 0,
-	"Y": 25,
-	"width": 40,
-	"height": 50,
-	"angle": 0
+	"X1": 0,
+	"Y1": 0,
+	"X2": 50,
+	"Y2": 50,
+	"angleDepart": 270,
+	"angleArrive": 90
+     },
+     "2":{
+	"Type":"line",
+	"Xa": 0,
+	"Ya": 0,
+	"Xb": 25,
+	"Yb": 0
+     },
+     "3":{
+	"Type":"line",
+	"Xa": 0,
+	"Ya": 50,
+	"Xb": 25,
+	"Yb": 50
      }
 }

@@ -46,11 +46,12 @@ class Parseur:
                 self.listeCoordonnees.append(int(data[''+str(nb)]['Xb']))
                 self.listeCoordonnees.append(int(data[''+str(nb)]['Yb']))
             if(data[str(nb)]["Type"]=="curve"):
-                self.listeCurve.append(float(data['' + str(nb)]['X']))
-                self.listeCurve.append(float(data['' + str(nb)]['Y']))
-                self.listeCurve.append(float(data['' + str(nb)]['width']))
-                self.listeCurve.append(float(data['' + str(nb)]['height']))
-                self.listeCurve.append(float(data['' + str(nb)]['angle']))
+                self.listeCurve.append(float(data['' + str(nb)]['X1']))
+                self.listeCurve.append(float(data['' + str(nb)]['Y1']))
+                self.listeCurve.append(float(data['' + str(nb)]['X2']))
+                self.listeCurve.append(float(data['' + str(nb)]['Y2']))
+                self.listeCurve.append(float(data['' + str(nb)]['angleDepart']))
+                self.listeCurve.append(float(data['' + str(nb)]['angleArrive']))
                 #https://matplotlib.org/3.1.0/api/_as_gen/matplotlib.patches.Arc.html
 
 
