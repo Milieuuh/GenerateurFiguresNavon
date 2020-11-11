@@ -10,7 +10,7 @@
 	"Type":"curve",
 	"X1": 0,
 	"Y1": 0,
-	"X2": 100,
+	"X2": 70,
 	"Y2": 100,
 	"angleDepart": 270,
 	"angleArrive": 90
@@ -19,14 +19,14 @@
 	"Type":"line",
 	"Xa": 0,
 	"Ya": 0,
-	"Xb": 50,
+	"Xb": 35,
 	"Yb": 0
      },
      "3":{
 	"Type":"line",
 	"Xa": 0,
 	"Ya": 100,
-	"Xb": 50,
+	"Xb": 35,
 	"Yb": 100
      }
 }

@@ -6,7 +6,7 @@
 	"X2": 50,
 	"Y2": 50,
 	"angleDepart": 90,
-	"angleArrive": 270
+	"angleArrive": 290
      },
      "1":{	
 	"Type":"curve",
@@ -15,6 +15,6 @@
 	"X2": 50,
 	"Y2": 100,
 	"angleDepart": 270,
-	"angleArrive": 90
+	"angleArrive": 120
      }
 }
