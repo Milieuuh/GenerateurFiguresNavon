@@ -37,7 +37,7 @@ class Parseur:
         i=0
         for x in data:
              i=i+1
- 
+
         
         for nb in range(0,i):
             if(data[str(nb)]["Type"]=="line"):

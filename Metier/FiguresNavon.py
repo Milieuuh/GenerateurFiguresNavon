@@ -20,17 +20,23 @@ class FigureNavon:
     def __init__(self):
         print("costructeur")
 
-    def __init__(self, elementG, elementL, taille, densite):
+    def __init__(self, elementG, elementL, LGHeight, LGWidth, LLHeight, LLWidth ,densite):
         self.elementGlobal = elementG
         self.elementLocal = elementL
         self.mesureTailleSegments = 0
-        self.tailleLG=taille
+        self.tailleLG=400
         self.densite = densite
         self.valeurMoyenneDeSymboles = 0
         self.nombreDeSegmentsDansLettre = 0
         self.listeTailleDesSegments = []
         self.listeFiguresNavon = []
         self.taillePoliceElementlocal = 15
+
+        #RAJOUTS PAR RAPPORT AUX TAILLES DE LETTRES
+        self.tailleLGHeight = LGHeight;
+        self.tailleLGWidth = LGWidth;
+        self.tailleLLHeight = LLHeight;
+        self.tailleLLWidth = LLWidth;
 
 
     #METHODES
@@ -165,6 +171,18 @@ class FigureNavon:
     def getNbCaractere(self):
         return self.nbCaracteresLocaux
 
+    def getHeightLG(self):
+        return self.tailleLGHeight
+
+    def getWidthLG(self):
+        return self.tailleLGWidth
+
+    def getHeightLL(self):
+        return self.tailleLLHeight
+
+    def getWidthLL(self):
+        return self.tailleLLWidth
+
     ###############################################SETTER
     def setElementGlobal(self, elmt):
         self.elementGlobal=elmt
@@ -173,12 +191,22 @@ class FigureNavon:
         self.elementLocal=elmt
 
     def setTailleLG(self,elmt):
-        self.tailleLG
+        self.tailleLG=nb
 
     def setNbCaractereLocaux(self,nb):
         self.nbCaracteresLocaux=nb
 
     def setDensite(self,nb):
-        self.densite;
+        self.densite=nb;
 
+    def setHeightLG(self,nb):
+        self.tailleLGHeight=nb
 
+    def setWidthLG(self, nb):
+        self.tailleLGWidth = nb
+
+    def setHeightLL(self,nb):
+        self.tailleLLHeight=nb
+
+    def setWidthLL(self, nb):
+        self.tailleLGWidth = nb

@@ -21,28 +21,34 @@ maFenetre.geometry("800x800")
 f=font.Font(family="Verdana",size=15)
 f_titre=font.Font(family="Verdana",size=20,weight="bold")
 
-maFigureNavon = FigureNavon("A", "B", 400, 20)
+maFigureNavon = FigureNavon("A", "B", 400, 400,40,40, 20)
 
 #apercu les fichiers png
 def generer():
+
     res_LettreGlobale=s_lGlobale.get()
     res_LettreLocale=s_lLocale.get()
-    res_hauteur=nb_hauteurGX.get()
-    res_densite=nb_densite.get()
+
     print("appel de FigureNavon:")
 
     maFigureNavon.setElementGlobal(res_LettreGlobale)
     maFigureNavon.setElementLocal(res_LettreLocale)
-    maFigureNavon.setTailleLG(res_hauteur)
+    maFigureNavon.setHeightLG(nb_HeightLG.get())
+    maFigureNavon.setWidthLG(nb_WidthLG.get())
+    maFigureNavon.setHeightLL(nb_HeightLL.get())
+    maFigureNavon.setWidthLL(nb_WidthLL.get())
     maFigureNavon.setDensite(nb_densite.get())
     maFigureNavon.creerFigureNavon()
-    
+
 #sauvergarder fichier png
 def sauvegarde():
 
     maFigureNavon.setElementGlobal(s_lGlobale.get())
     maFigureNavon.setElementLocal(s_lLocale.get())
-    maFigureNavon.setTailleLG(nb_hauteurGX.get())
+    maFigureNavon.setHeightLG(nb_HeightLG.get())
+    maFigureNavon.setWidthLG(nb_WidthLG.get())
+    maFigureNavon.setHeightLL(nb_HeightLL.get())
+    maFigureNavon.setWidthLL(nb_WidthLL.get())
     maFigureNavon.setDensite(nb_densite.get())
     maFigureNavon.creerFigureNavon()
     maFigureNavon.creerFigureNavon()
@@ -89,30 +95,57 @@ champ_lettreLocale.pack(side=LEFT)
 
 f_formeLettres.pack()
 
-#------------------------------------------------------HAUTEUR ET LARGEUR
+#------------------------------------------------------HAUTEUR ET LARGEUR LETTRE GLOBALE
 
 f_tailleLG = tkinter.Frame(lf_formeLettres,width=300, height=300, bd=10)
    
-nb_hauteurGX = tkinter.IntVar()
-nb_hauteurGX.set(400)
-Label(f_tailleLG,text="Size Global Letter : ").pack(side=LEFT)
-champ_tailleGX = tkinter.Entry(f_tailleLG,textvariable=nb_hauteurGX, bg="white", width="10")
+nb_HeightLG = tkinter.IntVar()
+nb_HeightLG.set(400)
+Label(f_tailleLG,text="Size Global Letter - Height :").pack(side=LEFT)
+champ_tailleGX = tkinter.Entry(f_tailleLG,textvariable=nb_HeightLG, bg="white", width="10")
 champ_tailleGX.pack(side=LEFT)
 Label(f_tailleLG,text=" px").pack(side=LEFT)
 
+
+nb_widthLG = tkinter.IntVar()
+nb_widthLG.set(400)
+Label(f_tailleLG,text=" - Width :").pack(side=LEFT)
+champ_WidthLG = tkinter.Entry(f_tailleLG,textvariable=nb_widthLG, bg="white", width="10")
+champ_WidthLG.pack(side=LEFT)
+Label(f_tailleLG,text=" px").pack(side=LEFT)
+
 f_tailleLG.pack()
+
+#------------------------------------------------------HAUTEUR ET LARGEUR LETTRE LOCALE
+f_tailleLL = tkinter.Frame(lf_formeLettres,width=300, height=300, bd=10)
+
+nb_HeightLL = tkinter.IntVar()
+nb_HeightLL.set(40)
+Label(f_tailleLL,text="Size Local Letter - Height :").pack(side=LEFT)
+champ_HeightLL = tkinter.Entry(f_tailleLL,textvariable=nb_HeightLL, bg="white", width="10")
+champ_HeightLL.pack(side=LEFT)
+Label(f_tailleLL,text=" px").pack(side=LEFT)
+
+nb_widthLL = tkinter.IntVar()
+nb_widthLL.set(40)
+Label(f_tailleLL,text=" - Width :").pack(side=LEFT)
+champ_WidthLG = tkinter.Entry(f_tailleLL,textvariable=nb_widthLL, bg="white", width="10")
+champ_WidthLG.pack(side=LEFT)
+Label(f_tailleLL,text=" px").pack(side=LEFT)
+
+f_tailleLL.pack()
 
 #------------------------------------------------------DENSITE
 f_densite = tkinter.Frame(lf_formeLettres,width=300, height=300, bd=10)
 
 nb_densite = tkinter.DoubleVar()
 nb_densite.set(0.5)
-Label(f_densite,text="Densité : ").pack(side=LEFT)
+Label(f_densite,text="Density : ").pack(side=LEFT)
 champ_densite = tkinter.Entry(f_densite,textvariable=nb_densite, bg="white", width="10")
 champ_densite.pack(side=LEFT)
 
 f_densite.pack()
-Label(f_densite,text=" (entre 0 et 1)").pack(side=LEFT)
+Label(f_densite,text=" (between 0 and 1)").pack(side=LEFT)
 
 
 #--------------------------------------------------------------------- BOUTON APERCU
@@ -126,7 +159,7 @@ bt_Apercu.pack()
 f_BOUTON.pack()
 
 #--------------------------------------------------------------------- BOUTON OUVRIR FICHIER PRE-EXISTANT
-lf_chargerFichier= tkinter.LabelFrame(maFenetre, text="Load File", padx=5,pady=1)
+lf_chargerFichier= tkinter.LabelFrame(maFenetre, text="Load Setting File", padx=5,pady=1)
 lf_chargerFichier.pack(fill="both",padx="10",pady="10",ipady="20",ipadx="10")
 
     #bouton charger fichier
