@@ -21,7 +21,7 @@ maFenetre.geometry("800x800")
 f=font.Font(family="Verdana",size=15)
 f_titre=font.Font(family="Verdana",size=20,weight="bold")
 
-maFigureNavon = FigureNavon("A", "B", 400, 400,40,40, 20)
+maFigureNavon = FigureNavon("A", "B", 400, 400,40, 20)
 
 #apercu les fichiers png
 def generer():
@@ -35,8 +35,7 @@ def generer():
     maFigureNavon.setElementLocal(res_LettreLocale)
     maFigureNavon.setHeightLG(nb_HeightLG.get())
     maFigureNavon.setWidthLG(nb_WidthLG.get())
-    maFigureNavon.setHeightLL(nb_HeightLL.get())
-    maFigureNavon.setWidthLL(nb_WidthLL.get())
+    maFigureNavon.setTailleLL(nb_HeightLL.get())
     maFigureNavon.setDensite(nb_densite.get())
     maFigureNavon.creerFigureNavon()
 
@@ -47,8 +46,7 @@ def sauvegarde():
     maFigureNavon.setElementLocal(s_lLocale.get())
     maFigureNavon.setHeightLG(nb_HeightLG.get())
     maFigureNavon.setWidthLG(nb_WidthLG.get())
-    maFigureNavon.setHeightLL(nb_HeightLL.get())
-    maFigureNavon.setWidthLL(nb_WidthLL.get())
+    maFigureNavon.setTailleLL(nb_HeightLL.get())
     maFigureNavon.setDensite(nb_densite.get())
     maFigureNavon.creerFigureNavon()
     maFigureNavon.creerFigureNavon()
@@ -121,16 +119,9 @@ f_tailleLL = tkinter.Frame(lf_formeLettres,width=300, height=300, bd=10)
 
 nb_HeightLL = tkinter.IntVar()
 nb_HeightLL.set(40)
-Label(f_tailleLL,text="Size Local Letter - Height :").pack(side=LEFT)
+Label(f_tailleLL,text="Size Local Letter :").pack(side=LEFT)
 champ_HeightLL = tkinter.Entry(f_tailleLL,textvariable=nb_HeightLL, bg="white", width="10")
 champ_HeightLL.pack(side=LEFT)
-Label(f_tailleLL,text=" px").pack(side=LEFT)
-
-nb_widthLL = tkinter.IntVar()
-nb_widthLL.set(40)
-Label(f_tailleLL,text=" - Width :").pack(side=LEFT)
-champ_WidthLG = tkinter.Entry(f_tailleLL,textvariable=nb_widthLL, bg="white", width="10")
-champ_WidthLG.pack(side=LEFT)
 Label(f_tailleLL,text=" px").pack(side=LEFT)
 
 f_tailleLL.pack()
