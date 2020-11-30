@@ -20,7 +20,7 @@ class FigureNavon:
     def __init__(self):
         print("costructeur")
 
-    def __init__(self, elementG, elementL, LGHeight, LGWidth, LLHeight, LLWidth ,densite):
+    def __init__(self, elementG, elementL, LGHeight, LGWidth, LL,densite):
         self.elementGlobal = elementG
         self.elementLocal = elementL
         self.mesureTailleSegments = 0
@@ -35,8 +35,7 @@ class FigureNavon:
         #RAJOUTS PAR RAPPORT AUX TAILLES DE LETTRES
         self.tailleLGHeight = LGHeight;
         self.tailleLGWidth = LGWidth;
-        self.tailleLLHeight = LLHeight;
-        self.tailleLLWidth = LLWidth;
+        self.tailleLL = LL;
 
 
     #METHODES
@@ -205,8 +204,5 @@ class FigureNavon:
     def setWidthLG(self, nb):
         self.tailleLGWidth = nb
 
-    def setHeightLL(self,nb):
-        self.tailleLLHeight=nb
-
-    def setWidthLL(self, nb):
-        self.tailleLGWidth = nb
+    def setTailleLL(self,nb):
+        self.tailleLL=nb
