@@ -106,7 +106,8 @@ class FigureNavon:
         ecart = (self.listeTailleDesSegments[numSegment]*self.densite) / nbElementSurMonSegment
         while i<Xb:
             y= m*i+p
-            img.multiline_text((i, y), str(self.elementLocal), fill=(0, 0, 0))
+            font = ImageFont.truetype("arial.ttf", size=self.tailleLL)
+            img.multiline_text((i, y), str(self.elementLocal), fill=(0, 0, 0), font=font)
             i = i+ecart
         
 
@@ -126,7 +127,8 @@ class FigureNavon:
             nbElementSurMonSegment = nbElementsLocaux * self.listeTailleDesSegments[numSegment]  / self.mesureTailleSegments
             ecart = (self.listeTailleDesSegments[numSegment] * self.densite) / nbElementSurMonSegment
             while y <self.listeTailleDesSegments[numSegment]:
-                img.multiline_text((Xa, y), str(self.elementLocal), fill=(0, 0, 0))
+                font = ImageFont.truetype("arial.ttf", size=self.tailleLL)
+                img.multiline_text((Xa, y), str(self.elementLocal),  fill=(0, 0, 0), font=font)
                 y= y+ecart
 
     def dessiner(self, X1, Y1,X2, Y2, angleDepart, angleArrive, img):

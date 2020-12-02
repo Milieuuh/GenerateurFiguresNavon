@@ -118,7 +118,7 @@ f_tailleLG.pack()
 f_tailleLL = tkinter.Frame(lf_formeLettres,width=300, height=300, bd=10)
 
 nb_HeightLL = tkinter.IntVar()
-nb_HeightLL.set(40)
+nb_HeightLL.set(18)
 Label(f_tailleLL,text="Size Local Letter :").pack(side=LEFT)
 champ_HeightLL = tkinter.Entry(f_tailleLL,textvariable=nb_HeightLL, bg="white", width="10")
 champ_HeightLL.pack(side=LEFT)
