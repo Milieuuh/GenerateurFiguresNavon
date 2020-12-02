@@ -1,6 +1,6 @@
 import elementGlobal, elementLocal, Parseur
 import matplotlib
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 from PIL import *
 from math import *
 from matplotlib.patches import *
@@ -30,12 +30,11 @@ class FigureNavon:
         self.nombreDeSegmentsDansLettre = 0
         self.listeTailleDesSegments = []
         self.listeFiguresNavon = []
-        self.taillePoliceElementlocal = 15
 
         #RAJOUTS PAR RAPPORT AUX TAILLES DE LETTRES
-        self.tailleLGHeight = LGHeight;
-        self.tailleLGWidth = LGWidth;
-        self.tailleLL = LL;
+        self.tailleLGHeight = LGHeight
+        self.tailleLGWidth = LGWidth
+        self.tailleLL = LL
 
 
     #METHODES
@@ -54,14 +53,14 @@ class FigureNavon:
         self.parser.lireFichier()
 
         #creation de l'image
-        img_figure_navon = Image.new("RGB", (512, 512), "white")
+        img_figure_navon = Image.new("RGB", (self.tailleLGWidth, self.tailleLGHeight), "white")
 
         img1 = ImageDraw.Draw(img_figure_navon)
 
         i=0
         while i<len(self.parser.getListeCoordonnees()):
             #mesure de la taille de tous les segments
-            self.calculMesureTailleSegments(self.parser.get(i)*self.tailleLG//100, self.parser.get(i+1)*self.tailleLG//100, self.parser.get(i+2)*self.tailleLG//100, self.parser.get(i+3)*self.tailleLG//100)
+            self.calculMesureTailleSegments(self.parser.get(i)*self.tailleLGWidth//100, self.parser.get(i+1)*self.tailleLGWidth//100, self.parser.get(i+2)*self.tailleLGWidth//100, self.parser.get(i+3)*self.tailleLGWidth//100)
             self.nombreDeSegmentsDansLettre=self.nombreDeSegmentsDansLettre+1
             print(self.mesureTailleSegments)
             i = i+4
@@ -69,7 +68,7 @@ class FigureNavon:
         i=0
         compteur =0
         while i<len(self.parser.getListeCoordonnees()):
-             self.placementElementsLocaux(self.parser.get(i)*self.tailleLG//100, self.parser.get(i+1)*self.tailleLG//100, self.parser.get(i+2)*self.tailleLG//100, self.parser.get(i+3)*self.tailleLG//100, img1, compteur)
+             self.placementElementsLocaux(self.parser.get(i)*self.tailleLGWidth//100, self.parser.get(i+1)*self.tailleLGWidth//100, self.parser.get(i+2)*self.tailleLGWidth//100, self.parser.get(i+3)*self.tailleLGWidth//100, img1, compteur)
              compteur = compteur + 1
              i = i+4
 
@@ -102,8 +101,8 @@ class FigureNavon:
         p= Ya - Xa*m
         i=Xa
 
-        nbElementsLocaux = self.densite * self.mesureTailleSegments / self.taillePoliceElementlocal
-        nbElementSurMonSegment = (nbElementsLocaux * self.listeTailleDesSegments[numSegment]*self.densite)/ (self.mesureTailleSegments * self.densite)
+        nbElementsLocaux = self.densite * self.mesureTailleSegments / self.tailleLL
+        nbElementSurMonSegment = nbElementsLocaux * self.listeTailleDesSegments[numSegment]*self.densite/ self.mesureTailleSegments
         ecart = (self.listeTailleDesSegments[numSegment]*self.densite) / nbElementSurMonSegment
         while i<Xb:
             y= m*i+p
@@ -123,8 +122,8 @@ class FigureNavon:
             #x=k, k étant une constante
         elif Xa == Xb:
             y=Ya
-            nbElementsLocaux = self.densite * self.mesureTailleSegments / self.taillePoliceElementlocal
-            nbElementSurMonSegment = (nbElementsLocaux * self.listeTailleDesSegments[numSegment] * self.densite) / (self.mesureTailleSegments * self.densite)
+            nbElementsLocaux = self.densite * self.mesureTailleSegments / self.tailleLL
+            nbElementSurMonSegment = nbElementsLocaux * self.listeTailleDesSegments[numSegment]  / self.mesureTailleSegments
             ecart = (self.listeTailleDesSegments[numSegment] * self.densite) / nbElementSurMonSegment
             while y <self.listeTailleDesSegments[numSegment]:
                 img.multiline_text((Xa, y), str(self.elementLocal), fill=(0, 0, 0))
@@ -189,20 +188,17 @@ class FigureNavon:
     def setElementLocal(self,elmt):
         self.elementLocal=elmt
 
-    def setTailleLG(self,elmt):
-        self.tailleLG=nb
+    def setNbCaractereLocaux(self, nb):
+        self.nbCaracteresLocaux = nb
 
-    def setNbCaractereLocaux(self,nb):
-        self.nbCaracteresLocaux=nb
+    def setDensite(self, nb):
+        self.densite = nb
 
-    def setDensite(self,nb):
-        self.densite=nb;
-
-    def setHeightLG(self,nb):
-        self.tailleLGHeight=nb
+    def setHeightLG(self, nb):
+        self.tailleLGHeigh = nb
 
     def setWidthLG(self, nb):
         self.tailleLGWidth = nb
 
-    def setTailleLL(self,nb):
-        self.tailleLL=nb
+    def setTailleLL(self, nb):
+        self.tailleLL = nb
