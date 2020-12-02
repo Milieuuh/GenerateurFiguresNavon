@@ -60,7 +60,8 @@ class FigureNavon:
         i=0
         while i<len(self.parser.getListeCoordonnees()):
             #mesure de la taille de tous les segments
-            self.calculMesureTailleSegments(self.parser.get(i)*self.tailleLGWidth//100, self.parser.get(i+1)*self.tailleLGWidth//100, self.parser.get(i+2)*self.tailleLGWidth//100, self.parser.get(i+3)*self.tailleLGWidth//100)
+            self.calculMesureTailleSegments(self.parser.get(i)*self.tailleLGWidth//100, self.parser.get(i+1)*self.tailleLGWidth//100,
+                                            self.parser.get(i+2)*self.tailleLGWidth//100, self.parser.get(i+3)*self.tailleLGWidth//100)
             self.nombreDeSegmentsDansLettre=self.nombreDeSegmentsDansLettre+1
             print(self.mesureTailleSegments)
             i = i+4
@@ -68,7 +69,9 @@ class FigureNavon:
         i=0
         compteur =0
         while i<len(self.parser.getListeCoordonnees()):
-             self.placementElementsLocaux(self.parser.get(i)*self.tailleLGWidth//100, self.parser.get(i+1)*self.tailleLGWidth//100, self.parser.get(i+2)*self.tailleLGWidth//100, self.parser.get(i+3)*self.tailleLGWidth//100, img1, compteur)
+             self.placementElementsLocaux(self.parser.get(i)*self.tailleLGWidth//100, self.parser.get(i+1)*self.tailleLGWidth//100,
+                                          self.parser.get(i+2)*self.tailleLGWidth//100, self.parser.get(i+3)*self.tailleLGWidth//100,
+                                          img1, compteur)
              compteur = compteur + 1
              i = i+4
 
