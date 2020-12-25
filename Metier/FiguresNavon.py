@@ -1,5 +1,6 @@
 import elementGlobal, elementLocal, Parseur
 import matplotlib
+import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 from PIL import *
 from math import *
@@ -85,7 +86,7 @@ class FigureNavon:
                                          self.parser.getElementCurve(i + 2) * self.tailleLG // 100,
                                          self.parser.getElementCurve(i + 3) * self.tailleLG // 100,
                                          self.parser.getElementCurve(i + 4),
-                                         self.parser.getElementCurve(i + 5), img1)
+                                         self.parser.getElementCurve(i + 5), img1, img_figure_navon)
             compteur = compteur + 1
             i = i + 6
 
@@ -134,16 +135,20 @@ class FigureNavon:
                 img.multiline_text((Xa, y), str(self.elementLocal),  fill=(0, 0, 0), font=font)
                 y= y+ecart
 
-    def dessiner(self, X1, Y1,X2, Y2, angleDepart, angleArrive, img):
+    def dessiner(self, X1, Y1,X2, Y2, angleDepart, angleArrive, imgDraw, img):
         print("dessiner un arc de cercle")
-
-        #img.arc([(X, Y), (width,width)], 0, 360, fill=(255,0,0))
-
-        img.arc([(X1, Y1), (X2, Y2)], angleDepart, angleArrive, fill=(255, 0, 0))
-        #img.arc([(50, 50), (50, 50)], 90, 270, fill=(255, 0, 0))
-
-        #img.ellipse(X, Y, width, height, angle)
-
+        b = Y1
+        arc = imgDraw.arc([(X1, Y1), (X2, Y2)], angleDepart, angleArrive, fill=(255,0,0))
+        font = ImageFont.truetype("arial.ttf", size=self.tailleLL)
+        compteur = 0
+        for i in range (self.tailleLGWidth):
+            for j in range (self.tailleLGHeigh):
+                if img.getpixel((i,j)) == (255,0,0):
+                    img.putpixel((i,j), (255,255,255))
+                    compteur = compteur+1
+                    if compteur == 50:
+                        compteur = 0
+                        imgDraw.text((i, j), str(self.elementLocal), fill=(0, 0, 0), font=font)
 
     def ajouterFigureNavon(self, newFigureNavon):
         self.listeFiguresNavon.append(newFigureNavon)
