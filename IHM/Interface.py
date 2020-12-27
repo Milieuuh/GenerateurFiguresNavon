@@ -49,13 +49,15 @@ def sauvegarde():
     maFigureNavon.setWidthLG(nb_widthLG.get())
     maFigureNavon.setTailleLL(nb_HeightLL.get())
     maFigureNavon.setDensite(nb_densite.get())
-    maFigureNavon.creerFigureNavon()
+    figure = maFigureNavon.creerFigureNavon()
 
-    filepath = asksaveasfilename(initialdir="/",title="Save as",filetypes=[('png files','*.png'),('jpeg files','*.jpg'),('all files','.*')])
+    #récupére le chemin où l'on souvegarde l'image = peut ajouter des extensions ici
+    filepath = tkinter.filedialog.asksaveasfilename(initialdir="/", title="Save as", defaultextension="*.*",
+                                                    filetypes=(("png files", "*.png"),('jpeg files','*.jpg'),('all files','*.*')))
     print(filepath)
 
 
-    #maFigureNavon.sauvegarderFigure(filepath)
+    maFigureNavon.sauvegarderFigure(figure, filepath)
 
 
 def charge():

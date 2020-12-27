@@ -100,7 +100,6 @@ class FigureNavon:
 
 
         return img_figure_navon
-        #self.sauvegarderFigure(img_figure_navon)
 
     def preview(self, img):
         img.show()
@@ -162,8 +161,8 @@ class FigureNavon:
     def ajouterFigureNavon(self, newFigureNavon):
         self.listeFiguresNavon.append(newFigureNavon)
 
-    def sauvegarderFigure(self, image):
-        image.save('nom.png')
+    def sauvegarderFigure(self, image, filePath):
+        image.save(filePath)
         print("sauvegarde")
 
     def chargerFigure(self, fichier):
