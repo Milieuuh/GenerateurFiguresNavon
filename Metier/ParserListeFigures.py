@@ -1,5 +1,7 @@
-class ParserListeFigures:
+from Metier.FiguresNavon import FigureNavon
 
+
+class ParserListeFigures:
 
     #CONSTRUCTEUR
     def __init__(self, nomFile):
@@ -12,6 +14,7 @@ class ParserListeFigures:
         self.marginY = 0
         self.sizeLettreLocal = 0
         self.densite = 0
+        self.listeFigures = []
 
     #METHODES POUR PARSER LE FICHIER
     def recupererDonneesFichier(self):
@@ -19,14 +22,7 @@ class ParserListeFigures:
             lignes = fichier.readlines()
         for ligne in lignes:
             champs = ligne.split()
-            self.lettreGlobal= champs[0]
-            self.lettreLocal= champs[1]
-            self.tailleImageWidth= champs[2]
-            self.tailleImageHeight= champs[3]
-            self.marginX= champs[4]
-            self.marginY= champs[5]
-            self.sizeLettreLocal= champs[6]
-            self.densite= champs[7]
+            self.listeFigures.append(FigureNavon(champs[0],champs[1], champs[2], champs[3], champs[4], champs[5], champs[6], champs[7]))
 
     ##################################GETTER
     def getNomfichier(self):
@@ -56,6 +52,9 @@ class ParserListeFigures:
     def getDensite(self):
         return self.densite
 
+    def getListeFigures(self):
+        return self.listeFigures
+
     ############################SETTER
     def setNomFichier(self, nom):
         self.nomFichier = nom
@@ -83,6 +82,9 @@ class ParserListeFigures:
 
     def setDensite(self, density):
         self.densite = density
+
+    def setListeFigures(self, liste):
+        self.listeFigures = liste
 
 
 monParseur = ParserListeFigures("C:/Users/Emilie Genton/Documents/GitHub/GenerateurFiguresNavon/Metier/text")

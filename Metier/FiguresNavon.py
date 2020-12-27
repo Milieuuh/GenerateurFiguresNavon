@@ -1,4 +1,4 @@
-import elementGlobal, elementLocal, Parseur
+import elementGlobal, elementLocal, Parseur, ParserListeFigures
 import matplotlib
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
@@ -6,7 +6,6 @@ from PIL import *
 from math import *
 from matplotlib.patches import *
 import matplotlib.pyplot as plt
-
 class FigureNavon:
 
     # ATTRIBUTS
@@ -167,7 +166,18 @@ class FigureNavon:
 
     def chargerFigure(self, fichier):
         self.fichier=fichier
-        
+
+
+    def genererToutesLesfiguresDUnFichier(self, cheminFichierLecteur, cheminSauvegarde):
+        print("génération des figures à partir d'un fichier")
+        parseurFichier = ParserListeFigures(cheminFichierLecteur)
+        parseurFichier.recupererDonneesFichier()
+
+        for element in parseurFichier.getListeFigure:
+            element.creerFigureNavon()
+            element.sauvegarderFigure()
+
+
     ###############################################GETTER
     def getElementGlobal(self):
         return self.elementGlobal

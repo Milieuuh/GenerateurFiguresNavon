@@ -22,6 +22,8 @@ f=font.Font(family="Verdana",size=15)
 f_titre=font.Font(family="Verdana",size=20,weight="bold")
 
 maFigureNavon = FigureNavon("A", "B", 400, 400, 40, 20, 10, 10)
+listeEstChargee = False
+filepathListeChargee = ""
 
 #apercu les fichiers png
 def generer():
@@ -45,29 +47,34 @@ def generer():
 #sauvergarder fichier png
 def sauvegarde():
 
-    maFigureNavon.setElementGlobal(s_lGlobale.get())
-    maFigureNavon.setElementLocal(s_lLocale.get())
-    maFigureNavon.setHeightLG(nb_HeightLG.get())
-    maFigureNavon.setWidthLG(nb_widthLG.get())
-    maFigureNavon.setTailleLL(nb_HeightLL.get())
-    maFigureNavon.setDensite(nb_densite.get())
-    maFigureNavon.setMargeX(nb_margeX.get())
-    maFigureNavon.setMargeY(nb_margeY.get())
-    figure = maFigureNavon.creerFigureNavon()
+    if listeEstChargee == False:
+        maFigureNavon.setElementGlobal(s_lGlobale.get())
+        maFigureNavon.setElementLocal(s_lLocale.get())
+        maFigureNavon.setHeightLG(nb_HeightLG.get())
+        maFigureNavon.setWidthLG(nb_widthLG.get())
+        maFigureNavon.setTailleLL(nb_HeightLL.get())
+        maFigureNavon.setDensite(nb_densite.get())
+        maFigureNavon.setMargeX(nb_margeX.get())
+        maFigureNavon.setMargeY(nb_margeY.get())
+        figure = maFigureNavon.creerFigureNavon()
 
-    #récupére le chemin où l'on souvegarde l'image = peut ajouter des extensions ici
-    filepath = tkinter.filedialog.asksaveasfilename(initialdir="/", title="Save as", defaultextension="*.*",
-                                                    filetypes=(("png files", "*.png"),('jpeg files','*.jpg'),('all files','*.*')))
-    print(filepath)
+        #récupére le chemin où l'on souvegarde l'image = peut ajouter des extensions ici
+        filepath = tkinter.filedialog.asksaveasfilename(initialdir="/", title="Save as", defaultextension="*.*",
+                                                        filetypes=(("png files", "*.png"),('jpeg files','*.jpg'),('all files','*.*')))
+        print(filepath)
+        maFigureNavon.sauvegarderFigure(filepath)
+    else:
+        filepath = tkinter.filedialog.askdirectory(initialdir="/", title="Choose directory to save")
+        maFigureNavon.genererToutesLesfiguresDUnFichier(filepathListeChargee, filepath)
 
 
-    maFigureNavon.sauvegarderFigure(figure, filepath)
 
 
 def charge():
-    filepath = askopenfilename(initialdir="/",title="Open as",filetypes=[('txt files','*.txt')])
-    Label(lf_chargerFichier, text=filepath).pack(side=LEFT)
-    maFigureNavon.chargerFigure(filepath)
+    filepathListeChargee = askopenfilename(initialdir="/",title="Open as", defaultextension="*.txt", filetypes=[('txt files','*.txt')])
+    Label(lf_chargerFichier, text=filepathListeChargee).pack(side=LEFT)
+    maFigureNavon.chargerFigure(filepathListeChargee)
+    listeEstChargee = True
 
 
 #--------------------------------------------------------------------- TITRE
