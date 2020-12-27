@@ -37,7 +37,8 @@ def generer():
     maFigureNavon.setWidthLG(nb_widthLG.get())
     maFigureNavon.setTailleLL(nb_HeightLL.get())
     maFigureNavon.setDensite(nb_densite.get())
-    maFigureNavon.creerFigureNavon()
+    figure = maFigureNavon.creerFigureNavon()
+    maFigureNavon.preview(figure)
 
 #sauvergarder fichier png
 def sauvegarde():
@@ -48,7 +49,6 @@ def sauvegarde():
     maFigureNavon.setWidthLG(nb_widthLG.get())
     maFigureNavon.setTailleLL(nb_HeightLL.get())
     maFigureNavon.setDensite(nb_densite.get())
-    maFigureNavon.creerFigureNavon()
     maFigureNavon.creerFigureNavon()
 
     filepath = asksaveasfilename(initialdir="/",title="Save as",filetypes=[('png files','*.png'),('jpeg files','*.jpg'),('all files','.*')])
