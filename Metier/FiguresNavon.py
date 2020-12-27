@@ -21,7 +21,7 @@ class FigureNavon:
     def __init__(self):
         print("costructeur")
 
-    def __init__(self, elementG, elementL, LGHeight, LGWidth, LL,densite):
+    def __init__(self, elementG, elementL, LGHeight, LGWidth, LL,densite, margeX, margeY):
         self.elementGlobal = elementG
         self.elementLocal = elementL
         self.mesureTailleSegments = 0
@@ -38,8 +38,8 @@ class FigureNavon:
         self.tailleLL = LL
 
         #AJOUT MARGES GAUCHE ET HAUT
-        self.margeGauche = 20
-        self.margeHaut = 20
+        self.margeX = margeX
+        self.margeY = margeY
 
 
     #METHODES
@@ -66,8 +66,8 @@ class FigureNavon:
         i=0
         while i<len(self.parser.getListeCoordonnees()):
             #mesure de la taille de tous les segments
-            self.calculMesureTailleSegments(self.parser.get(i)*self.tailleLGWidth//100, self.parser.get(i+1)*self.tailleLGWidth//100,
-                                            self.parser.get(i+2)*self.tailleLGWidth//100, self.parser.get(i+3)*self.tailleLGWidth//100)
+            self.calculMesureTailleSegments(self.parser.get(i)*self.tailleLGWidth//100+self.margeX, self.parser.get(i+1)*self.tailleLGWidth//100+ self.margeY,
+                                            self.parser.get(i+2)*self.tailleLGWidth//100+self.margeX, self.parser.get(i+3)*self.tailleLGWidth//100+ self.margeY)
             self.nombreDeSegmentsDansLettre=self.nombreDeSegmentsDansLettre+1
             print(self.mesureTailleSegments)
             i = i+4
@@ -75,8 +75,8 @@ class FigureNavon:
         i=0
         compteur =0
         while i<len(self.parser.getListeCoordonnees()):
-             self.placementElementsLocaux(self.parser.get(i)*self.tailleLGWidth//100, self.parser.get(i+1)*self.tailleLGWidth//100,
-                                          self.parser.get(i+2)*self.tailleLGWidth//100, self.parser.get(i+3)*self.tailleLGWidth//100,
+             self.placementElementsLocaux(self.parser.get(i)*self.tailleLGWidth//100+self.margeX, self.parser.get(i+1)*self.tailleLGWidth//100+ self.margeY,
+                                          self.parser.get(i+2)*self.tailleLGWidth//100+self.margeX, self.parser.get(i+3)*self.tailleLGWidth//100+ self.margeY,
                                           img1, compteur)
              compteur = compteur + 1
              i = i+4
@@ -199,6 +199,12 @@ class FigureNavon:
     def getWidthLL(self):
         return self.tailleLLWidth
 
+    def getMargeX(self):
+        return self.margeX
+
+    def getMargeY(self):
+        return self.margeY
+
     ###############################################SETTER
     def setElementGlobal(self, elmt):
         self.elementGlobal=elmt
@@ -220,3 +226,9 @@ class FigureNavon:
 
     def setTailleLL(self, nb):
         self.tailleLL = nb
+
+    def setMargeX(self, nb):
+        self.margeX = nb
+
+    def setMargeY(self, nb):
+            self.margeY= nb

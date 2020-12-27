@@ -21,7 +21,7 @@ maFenetre.geometry("800x800")
 f=font.Font(family="Verdana",size=15)
 f_titre=font.Font(family="Verdana",size=20,weight="bold")
 
-maFigureNavon = FigureNavon("A", "B", 400, 400,40, 20)
+maFigureNavon = FigureNavon("A", "B", 400, 400, 40, 20, 10, 10)
 
 #apercu les fichiers png
 def generer():
@@ -37,6 +37,8 @@ def generer():
     maFigureNavon.setWidthLG(nb_widthLG.get())
     maFigureNavon.setTailleLL(nb_HeightLL.get())
     maFigureNavon.setDensite(nb_densite.get())
+    maFigureNavon.setMargeX(nb_margeX.get())
+    maFigureNavon.setMargeY(nb_margeY.get())
     figure = maFigureNavon.creerFigureNavon()
     maFigureNavon.preview(figure)
 
@@ -49,6 +51,8 @@ def sauvegarde():
     maFigureNavon.setWidthLG(nb_widthLG.get())
     maFigureNavon.setTailleLL(nb_HeightLL.get())
     maFigureNavon.setDensite(nb_densite.get())
+    maFigureNavon.setMargeX(nb_margeX.get())
+    maFigureNavon.setMargeY(nb_margeY.get())
     figure = maFigureNavon.creerFigureNavon()
 
     #récupére le chemin où l'on souvegarde l'image = peut ajouter des extensions ici
@@ -115,6 +119,26 @@ champ_WidthLG.pack(side=LEFT)
 Label(f_tailleLG,text=" px").pack(side=LEFT)
 
 f_tailleLG.pack()
+
+# ------------------------------------------------------Marge X Y
+
+f_marge = tkinter.Frame(lf_formeLettres, width=300, height=300, bd=10)
+
+nb_margeX = tkinter.IntVar()
+nb_margeX.set(10)
+Label(f_marge, text="Margin X :").pack(side=LEFT)
+champ_margeX = tkinter.Entry(f_marge, textvariable=nb_margeX, bg="white", width="10")
+champ_margeX.pack(side=LEFT)
+Label(f_marge, text=" px").pack(side=LEFT)
+
+nb_margeY = tkinter.IntVar()
+nb_margeY.set(10)
+Label(f_marge, text=" -  Y :").pack(side=LEFT)
+champ_margeY = tkinter.Entry(f_marge, textvariable=nb_margeY, bg="white", width="10")
+champ_margeY.pack(side=LEFT)
+Label(f_marge, text=" px").pack(side=LEFT)
+
+f_marge.pack()
 
 #------------------------------------------------------HAUTEUR ET LARGEUR LETTRE LOCALE
 f_tailleLL = tkinter.Frame(lf_formeLettres,width=300, height=300, bd=10)
