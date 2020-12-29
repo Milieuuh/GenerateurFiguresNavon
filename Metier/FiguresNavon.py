@@ -40,6 +40,10 @@ class FigureNavon:
         self.margeX = margeX
         self.margeY = margeY
 
+        #fichier chargé ?
+        self.fichierCharge = False
+        self.cheminFichierCharge = ""
+
 
     #METHODES
 
@@ -57,9 +61,9 @@ class FigureNavon:
         self.parser.lireFichier()
 
         #creation de l'image
-        img_figure_navon = Image.new("RGB", (self.tailleLGWidth, self.tailleLGHeight), "white")
+        self.img_figure_navon = Image.new("RGB", (self.tailleLGWidth, self.tailleLGHeight), "white")
 
-        img1 = ImageDraw.Draw(img_figure_navon)
+        img1 = ImageDraw.Draw(self.img_figure_navon)
 
         #on s'occupe des droites en fonction des coordonées obtenues par le parser
         i=0
@@ -88,7 +92,7 @@ class FigureNavon:
                                          self.parser.getElementCurve(i + 2) * self.tailleLG // 100,
                                          self.parser.getElementCurve(i + 3) * self.tailleLG // 100,
                                          self.parser.getElementCurve(i + 4),
-                                         self.parser.getElementCurve(i + 5), img1, img_figure_navon)
+                                         self.parser.getElementCurve(i + 5), img1, self.img_figure_navon)
             compteur = compteur + 1
             i = i + 6
 
@@ -98,7 +102,7 @@ class FigureNavon:
        
 
 
-        return img_figure_navon
+        return self.img_figure_navon
 
     def preview(self, img):
         img.show()
@@ -113,7 +117,7 @@ class FigureNavon:
         ecart = (self.listeTailleDesSegments[numSegment]*self.densite) / nbElementSurMonSegment
         while i<Xb:
             y= m*i+p
-            font = ImageFont.truetype("arial.ttf", size=self.tailleLL)
+            font = ImageFont.truetype("arial.ttf", size=int(self.tailleLL))
             img.multiline_text((i, y), str(self.elementLocal), fill=(0, 0, 0), font=font)
             i = i+ecart
         
@@ -134,7 +138,7 @@ class FigureNavon:
             nbElementSurMonSegment = nbElementsLocaux * self.listeTailleDesSegments[numSegment]  / self.mesureTailleSegments
             ecart = (self.listeTailleDesSegments[numSegment] * self.densite) / nbElementSurMonSegment
             while y <self.listeTailleDesSegments[numSegment]:
-                font = ImageFont.truetype("arial.ttf", size=self.tailleLL)
+                font = ImageFont.truetype("arial.ttf", size=int(self.tailleLL))
                 img.multiline_text((Xa, y), str(self.elementLocal),  fill=(0, 0, 0), font=font)
                 y= y+ecart
 
@@ -143,10 +147,10 @@ class FigureNavon:
         b = Y1
         #on dessine l'arc en rouge
         imgDraw.arc([(X1, Y1), (X2, Y2)], angleDepart, angleArrive, fill=(255,0,0))
-        font = ImageFont.truetype("arial.ttf", size=self.tailleLL)
+        font = ImageFont.truetype("arial.ttf", size=int(self.tailleLL))
         compteur = 0
         for i in range (self.tailleLGWidth):
-            for j in range (self.tailleLGHeigh):
+            for j in range (self.tailleLGHeight):
                 r, g, b = img.getpixel((i, j))
                 #si le pixel est dans les tons rouges, alors on est sur l'arc et donc on remet le pixel en blanc
                 if r > g and r > b:
@@ -166,16 +170,20 @@ class FigureNavon:
 
     def chargerFigure(self, fichier):
         self.fichier=fichier
+        self.fichierCharge = True
+        self.cheminFichierCharge = fichier
 
 
     def genererToutesLesfiguresDUnFichier(self, cheminFichierLecteur, cheminSauvegarde):
         print("génération des figures à partir d'un fichier")
-        parseurFichier = ParserListeFigures(cheminFichierLecteur)
+        parseurFichier = ParserListeFigures.ParserListeFigures(cheminFichierLecteur)
         parseurFichier.recupererDonneesFichier()
 
-        for element in parseurFichier.getListeFigure:
+        i=0
+        for element in parseurFichier.getListeFigures():
             element.creerFigureNavon()
-            element.sauvegarderFigure()
+            element.sauvegarderFigure(element.img_figure_navon, cheminSauvegarde+"/"+str(i)+".png")
+            i = i +1
 
 
     ###############################################GETTER
@@ -214,6 +222,12 @@ class FigureNavon:
 
     def getMargeY(self):
         return self.margeY
+
+    def getFichierCharge(self):
+        return self.fichierCharge
+
+    def getCheminFichierCharge(self):
+        return  self.cheminFichierCharge
 
     ###############################################SETTER
     def setElementGlobal(self, elmt):

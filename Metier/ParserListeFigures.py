@@ -22,7 +22,7 @@ class ParserListeFigures:
             lignes = fichier.readlines()
         for ligne in lignes:
             champs = ligne.split()
-            self.listeFigures.append(FigureNavon(champs[0],champs[1], champs[2], champs[3], champs[4], champs[5], champs[6], champs[7]))
+            self.listeFigures.append(FigureNavon(champs[0],champs[1], int(champs[2]), int(champs[3]), float(champs[4]), int(champs[5]), int(champs[6]), int(champs[7])))
 
     ##################################GETTER
     def getNomfichier(self):

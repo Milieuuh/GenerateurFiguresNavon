@@ -11,7 +11,6 @@ sys.path.append(os.path.abspath(".")+'\\Metier')
 
 from FiguresNavon import *
 
-
 #fenetrePrincipale
 maFenetre = tkinter.Tk()
 maFenetre.title("générateur de Navon")
@@ -47,7 +46,7 @@ def generer():
 #sauvergarder fichier png
 def sauvegarde():
 
-    if listeEstChargee == False:
+    if maFigureNavon.getFichierCharge() == False:
         maFigureNavon.setElementGlobal(s_lGlobale.get())
         maFigureNavon.setElementLocal(s_lLocale.get())
         maFigureNavon.setHeightLG(nb_HeightLG.get())
@@ -62,19 +61,18 @@ def sauvegarde():
         filepath = tkinter.filedialog.asksaveasfilename(initialdir="/", title="Save as", defaultextension="*.*",
                                                         filetypes=(("png files", "*.png"),('jpeg files','*.jpg'),('all files','*.*')))
         print(filepath)
-        maFigureNavon.sauvegarderFigure(filepath)
+        maFigureNavon.sauvegarderFigure(figure, filepath)
     else:
         filepath = tkinter.filedialog.askdirectory(initialdir="/", title="Choose directory to save")
-        maFigureNavon.genererToutesLesfiguresDUnFichier(filepathListeChargee, filepath)
+        maFigureNavon.genererToutesLesfiguresDUnFichier(maFigureNavon.getCheminFichierCharge(), filepath)
 
 
 
 
 def charge():
-    filepathListeChargee = askopenfilename(initialdir="/",title="Open as", defaultextension="*.txt", filetypes=[('txt files','*.txt')])
+    filepathListeChargee = askopenfilename(initialdir="/", title="Open as", defaultextension="*.*", filetypes=(("text files", "*.txt"), ("all files", "*.*")))
     Label(lf_chargerFichier, text=filepathListeChargee).pack(side=LEFT)
     maFigureNavon.chargerFigure(filepathListeChargee)
-    listeEstChargee = True
 
 
 #--------------------------------------------------------------------- TITRE
