@@ -18,7 +18,7 @@ class FigureNavon:
 
     #CONSTRUCTEUR
     def __init__(self):
-        print("costructeur")
+        print("constructeur")
 
     def __init__(self, elementG, elementL, LGHeight, LGWidth, LL,densite, margeX, margeY):
         self.elementGlobal = elementG
@@ -172,6 +172,7 @@ class FigureNavon:
         self.fichier=fichier
         self.fichierCharge = True
         self.cheminFichierCharge = fichier
+
 
 
     def genererToutesLesfiguresDUnFichier(self, cheminFichierLecteur, cheminSauvegarde):

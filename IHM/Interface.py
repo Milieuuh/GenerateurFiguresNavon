@@ -43,7 +43,7 @@ def generer():
     figure = maFigureNavon.creerFigureNavon()
     maFigureNavon.preview(figure)
 
-#sauvergarder fichier png
+#---------------------------------------------------------sauvegarder fichier png
 def sauvegarde():
 
     if maFigureNavon.getFichierCharge() == False:
@@ -66,9 +66,7 @@ def sauvegarde():
         filepath = tkinter.filedialog.askdirectory(initialdir="/", title="Choose directory to save")
         maFigureNavon.genererToutesLesfiguresDUnFichier(maFigureNavon.getCheminFichierCharge(), filepath)
 
-
-
-
+#------------------------------------------------------------Charger les données d'un fichier text
 def charge():
     filepathListeChargee = askopenfilename(initialdir="/", title="Open as", defaultextension="*.*", filetypes=(("text files", "*.txt"), ("all files", "*.*")))
     Label(lf_chargerFichier, text=filepathListeChargee).pack(side=LEFT)
@@ -191,6 +189,10 @@ bt_Charge.pack()
 
     #texte et affichage de l'adresse
 Label(lf_chargerFichier,text="File load : ").pack(side=LEFT)
+
+    #Liste des différentes combinaisons
+l_listeCombinaisons = tkinter.Listbox(lf_chargerFichier,listvariable=maFigureNavon.getListeFiguresNavon(),activestyle='underline', height=3,selectmode='single')
+l_listeCombinaisons.pack(side=BOTTOM)
 
 #--------------------------------------------------------------------- BOUTON GENERER LE FICHIER
 lf_sauvegardeForme= tkinter.LabelFrame(maFenetre, text="Save",padx=5,pady=1)

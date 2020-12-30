@@ -87,5 +87,7 @@ class ParserListeFigures:
         self.listeFigures = liste
 
 
+'''
 monParseur = ParserListeFigures("C:/Users/Emilie Genton/Documents/GitHub/GenerateurFiguresNavon/Metier/text")
 monParseur.recupererDonneesFichier()
+'''
