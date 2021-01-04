@@ -71,6 +71,28 @@ def charge():
     filepathListeChargee = askopenfilename(initialdir="/", title="Open as", defaultextension="*.*", filetypes=(("text files", "*.txt"), ("all files", "*.*")))
     Label(lf_chargerFichier, text=filepathListeChargee).pack(side=LEFT)
     maFigureNavon.chargerFigure(filepathListeChargee)
+    maFigureNavon.setFichierCharge(True)
+
+    # Liste des différentes combinaisons
+
+    i = 1
+    for element in maFigureNavon.getListeFiguresNavon():
+        l_listeCombinaisons.insert(i, element.toString())
+
+
+        if i==1:
+            s_lGlobale.set(element.getElementGlobal())
+            s_lLocale.set(element.getElementLocal())
+            nb_HeightLG.set(element.getHeightLG())
+            nb_HeightLG.set(element.getWidthLG())
+            nb_densite.set(element.getDensite())
+            nb_HeightLL.set(element.getTailleLL())
+            nb_margeX.set(element.getMargeX())
+            nb_margeY.set(element.getMargeY())
+        i = i + 1
+
+    l_listeCombinaisons.pack(side=BOTTOM)
+
 
 
 #--------------------------------------------------------------------- TITRE
@@ -191,8 +213,31 @@ bt_Charge.pack()
 Label(lf_chargerFichier,text="File load : ").pack(side=LEFT)
 
     #Liste des différentes combinaisons
-l_listeCombinaisons = tkinter.Listbox(lf_chargerFichier,listvariable=maFigureNavon.getListeFiguresNavon(),activestyle='underline', height=3,selectmode='single')
+l_listeCombinaisons = tkinter.Listbox(lf_chargerFichier, listvariable=maFigureNavon.getListeFiguresNavon(),
+                                      activestyle='underline', height=3, width=100, selectmode='single')
+
+i=1
+for element in maFigureNavon.getListeFiguresNavon():
+    l_listeCombinaisons.insert(i,element)
+    i=i+1
+
 l_listeCombinaisons.pack(side=BOTTOM)
+
+numLigne = l_listeCombinaisons.curselection()
+print("numligen "+str(numLigne))
+i=0
+for element in maFigureNavon.getListeFiguresNavon():
+
+    if i==numLigne:
+        s_lGlobale.set(element.getElementGlobal())
+        s_lLocale.set(element.getElementLocal())
+        nb_HeightLG.set(element.getHeightLG())
+        nb_HeightLG.set(element.getWidthLG())
+        nb_densite.set(element.getDensite())
+        nb_HeightLL.set(element.getTailleLL())
+        nb_margeX.set(element.getMargeX())
+        nb_margeY.set(element.getMargeY())
+    i=i+1
 
 #--------------------------------------------------------------------- BOUTON GENERER LE FICHIER
 lf_sauvegardeForme= tkinter.LabelFrame(maFenetre, text="Save",padx=5,pady=1)

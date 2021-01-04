@@ -20,7 +20,7 @@ class FigureNavon:
     def __init__(self):
         print("constructeur")
 
-    def __init__(self, elementG, elementL, LGHeight, LGWidth, LL,densite, margeX, margeY):
+    def __init__(self, elementG, elementL, LGHeight, LGWidth,densite,LL, margeX, margeY):
         self.elementGlobal = elementG
         self.elementLocal = elementL
         self.mesureTailleSegments = 0
@@ -173,6 +173,11 @@ class FigureNavon:
         self.fichierCharge = True
         self.cheminFichierCharge = fichier
 
+        parseurFichier = ParserListeFigures.ParserListeFigures(fichier)
+        parseurFichier.recupererDonneesFichier()
+
+        for element in parseurFichier.getListeFigures():
+            self.ajouterFigureNavon(element)
 
 
     def genererToutesLesfiguresDUnFichier(self, cheminFichierLecteur, cheminSauvegarde):
@@ -182,6 +187,7 @@ class FigureNavon:
 
         i=0
         for element in parseurFichier.getListeFigures():
+            self.ajouterFigureNavon(element)
             element.creerFigureNavon()
             element.sauvegarderFigure(element.img_figure_navon, cheminSauvegarde+"/"+str(i)+".png")
             i = i +1
@@ -218,6 +224,9 @@ class FigureNavon:
     def getWidthLL(self):
         return self.tailleLLWidth
 
+    def getTailleLL(self):
+        return self.tailleLL
+
     def getMargeX(self):
         return self.margeX
 
@@ -229,6 +238,9 @@ class FigureNavon:
 
     def getCheminFichierCharge(self):
         return  self.cheminFichierCharge
+
+    def getDensite(self):
+        return  self.densite
 
     ###############################################SETTER
     def setElementGlobal(self, elmt):
@@ -256,4 +268,14 @@ class FigureNavon:
         self.margeX = nb
 
     def setMargeY(self, nb):
-            self.margeY= nb
+            self.margeY= +" "
+
+    def setFichierCharge(self, bool):
+        self.fichierCharge = bool
+
+
+    #############################################toString
+    def toString(self):
+        return self.getElementGlobal() + " " + self.getElementLocal()+" "+str(self.getWidthLG())+" "+str(self.getHeightLG())+" "+str(self.getDensite())+" "+str(self.tailleLL)+" "+str(self.margeX)+" "+str(self.margeY)
+
+        #return self.getElementGlobal()+" "+self.getElementLocal()+" "+str(self.getWidthLG())+" "+str(self.getHeightLG())+" "+str(self.densite)+" "+str(self.tailleLL)+" "+str(self.margeX)+" "+str(self.margeY())
