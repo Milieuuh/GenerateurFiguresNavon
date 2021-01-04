@@ -79,7 +79,6 @@ def charge():
     for element in maFigureNavon.getListeFiguresNavon():
         l_listeCombinaisons.insert(i, element.toString())
 
-
         if i==1:
             s_lGlobale.set(element.getElementGlobal())
             s_lLocale.set(element.getElementLocal())
@@ -92,7 +91,8 @@ def charge():
         i = i + 1
 
     l_listeCombinaisons.pack(side=BOTTOM)
-
+    bt = tkinter.Button(lf_chargerFichier, txt="get item", command=updateSelection())
+    bt.pack()
 
 
 #--------------------------------------------------------------------- TITRE
@@ -223,21 +223,24 @@ for element in maFigureNavon.getListeFiguresNavon():
 
 l_listeCombinaisons.pack(side=BOTTOM)
 
-numLigne = l_listeCombinaisons.curselection()
-print("numligen "+str(numLigne))
-i=0
-for element in maFigureNavon.getListeFiguresNavon():
+selected_item = StringVar()
 
-    if i==numLigne:
-        s_lGlobale.set(element.getElementGlobal())
-        s_lLocale.set(element.getElementLocal())
-        nb_HeightLG.set(element.getHeightLG())
-        nb_HeightLG.set(element.getWidthLG())
-        nb_densite.set(element.getDensite())
-        nb_HeightLL.set(element.getTailleLL())
-        nb_margeX.set(element.getMargeX())
-        nb_margeY.set(element.getMargeY())
-    i=i+1
+
+def updateSelection():
+    line = l_listeCombinaisons.curselection()[i]
+    element = l_listeCombinaisons.get(line)
+
+    s_lGlobale.set(element.getElementGlobal())
+    s_lLocale.set(element.getElementLocal())
+    nb_HeightLG.set(element.getHeightLG())
+    nb_HeightLG.set(element.getWidthLG())
+    nb_densite.set(element.getDensite())
+    nb_HeightLL.set(element.getTailleLL())
+    nb_margeX.set(element.getMargeX())
+    nb_margeY.set(element.getMargeY())
+
+
+
 
 #--------------------------------------------------------------------- BOUTON GENERER LE FICHIER
 lf_sauvegardeForme= tkinter.LabelFrame(maFenetre, text="Save",padx=5,pady=1)
