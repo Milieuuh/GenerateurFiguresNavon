@@ -8,9 +8,9 @@
      },
      "1":{
 	"Type":"curve",
-	"X1": 0,
+	"X1": 2.5,
 	"Y1": 0,
-	"X2": 70,
+	"X2": 72.5,
 	"Y2": 70,
 	"angleDepart": 360,
 	"angleArrive": 180
