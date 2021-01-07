@@ -20,7 +20,7 @@ class FigureNavon:
     def __init__(self):
         print("constructeur")
 
-    def __init__(self, elementG, elementL, LGHeight, LGWidth,densite,LL, margeX, margeY):
+    def __init__(self, elementG, elementL, tailleX, tailleY, LGHeight, LGWidth,densite,LL, margeX, margeY):
         self.elementGlobal = elementG
         self.elementLocal = elementL
         self.mesureTailleSegments = 0
@@ -30,6 +30,8 @@ class FigureNavon:
         self.nombreDeSegmentsDansLettre = 0
         self.listeTailleDesSegments = []
         self.listeFiguresNavon = []
+        self.tailleX= tailleX
+        self.tailleY= tailleY
 
         #RAJOUTS PAR RAPPORT AUX TAILLES DE LETTRES
         self.tailleLGHeight = LGHeight
@@ -61,7 +63,7 @@ class FigureNavon:
         self.parser.lireFichier()
 
         #creation de l'image
-        self.img_figure_navon = Image.new("RGB", (self.tailleLGWidth, self.tailleLGHeight), "white")
+        self.img_figure_navon = Image.new("RGB", (self.tailleX, self.tailleY), "white")
 
         img1 = ImageDraw.Draw(self.img_figure_navon)
 
@@ -69,8 +71,8 @@ class FigureNavon:
         i=0
         while i<len(self.parser.getListeCoordonnees()):
             #mesure de la taille de tous les segments
-            self.calculMesureTailleSegments(self.parser.get(i)*self.tailleLGWidth//100+self.margeX, self.parser.get(i+1)*self.tailleLGWidth//100 + self.margeY,
-                                            self.parser.get(i+2)*self.tailleLGWidth//100+self.margeX, self.parser.get(i+3)*self.tailleLGWidth//100 + self.margeY)
+            self.calculMesureTailleSegments(self.parser.get(i)*self.tailleX//100+self.margeX, self.parser.get(i+1)*self.tailleX//100 + self.margeY,
+                                            self.parser.get(i+2)*self.tailleX//100+self.margeX, self.parser.get(i+3)*self.tailleX//100 + self.margeY)
             self.nombreDeSegmentsDansLettre=self.nombreDeSegmentsDansLettre+1
             print(self.mesureTailleSegments)
             i = i+4
@@ -78,8 +80,8 @@ class FigureNavon:
         i=0
         compteur =0
         while i<len(self.parser.getListeCoordonnees()):
-             self.placementElementsLocaux(self.parser.get(i)*self.tailleLGWidth//100+self.margeX, self.parser.get(i+1)*self.tailleLGWidth//100 + self.margeY,
-                                          self.parser.get(i+2)*self.tailleLGWidth//100+self.margeX, self.parser.get(i+3)*self.tailleLGWidth//100 + self.margeY,
+             self.placementElementsLocaux(self.parser.get(i)*self.tailleX//100+self.margeX, self.parser.get(i+1)*self.tailleX//100 + self.margeY,
+                                          self.parser.get(i+2)*self.tailleX//100+self.margeX, self.parser.get(i+3)*self.tailleX//100 + self.margeY,
                                           img1, compteur)
              compteur = compteur + 1
              i = i+4
@@ -148,8 +150,8 @@ class FigureNavon:
         imgDraw.arc([(X1, Y1), (X2, Y2)], angleDepart, angleArrive, fill=(255,0,0))
         font = ImageFont.truetype("arial.ttf", size=int(self.tailleLL))
         compteur = 0
-        for i in range (self.tailleLGWidth):
-            for j in range (self.tailleLGHeight):
+        for i in range (self.tailleX):
+            for j in range (self.tailleY):
                 r, g, b = img.getpixel((i, j))
                 #si le pixel est dans les tons rouges, alors on est sur l'arc et donc on remet le pixel en blanc
                 if r > g and r > b:
@@ -158,8 +160,8 @@ class FigureNavon:
                     if compteur == 40:
                         compteur = 0'''
                     imgDraw.text((i, j), str(self.elementLocal), fill=(0, 0, 0), font=font)
-                elif r!=g and g!=b and g!=0:
-                    imgDraw.text((i, j), str(self.elementLocal), fill=(0, 0, 0), font=font)
+                ''' elif img.getpixel(i, j) == (0,0,0):
+                    imgDraw.text((i, j), str(self.elementLocal), fill=(0, 0, 0), font=font)'''
 
 
 
@@ -245,6 +247,12 @@ class FigureNavon:
     def getDensite(self):
         return  self.densite
 
+    def getTailleX(self):
+        return  self.tailleX
+
+    def getTailleY(self):
+        return  self.tailleY
+
     ###############################################SETTER
     def setElementGlobal(self, elmt):
         self.elementGlobal=elmt
@@ -272,6 +280,12 @@ class FigureNavon:
 
     def setMargeY(self, nb):
             self.margeY= nb
+
+    def setTailleX(self, nb):
+        self.tailleX = nb
+
+    def setTailleY(self, nb):
+        self.tailleY = nb
 
     def setFichierCharge(self, bool):
         self.fichierCharge = bool
