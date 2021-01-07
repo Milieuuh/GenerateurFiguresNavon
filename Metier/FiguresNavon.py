@@ -69,8 +69,8 @@ class FigureNavon:
         i=0
         while i<len(self.parser.getListeCoordonnees()):
             #mesure de la taille de tous les segments
-            self.calculMesureTailleSegments(self.parser.get(i)*self.tailleLGWidth//100+self.margeX, self.parser.get(i+1)*self.tailleLGWidth//100+ self.margeY,
-                                            self.parser.get(i+2)*self.tailleLGWidth//100+self.margeX, self.parser.get(i+3)*self.tailleLGWidth//100+ self.margeY)
+            self.calculMesureTailleSegments(self.parser.get(i)*self.tailleLGWidth//100+self.margeX, self.parser.get(i+1)*self.tailleLGWidth//100 + self.margeY,
+                                            self.parser.get(i+2)*self.tailleLGWidth//100+self.margeX, self.parser.get(i+3)*self.tailleLGWidth//100 + self.margeY)
             self.nombreDeSegmentsDansLettre=self.nombreDeSegmentsDansLettre+1
             print(self.mesureTailleSegments)
             i = i+4
@@ -78,8 +78,8 @@ class FigureNavon:
         i=0
         compteur =0
         while i<len(self.parser.getListeCoordonnees()):
-             self.placementElementsLocaux(self.parser.get(i)*self.tailleLGWidth//100+self.margeX, self.parser.get(i+1)*self.tailleLGWidth//100+ self.margeY,
-                                          self.parser.get(i+2)*self.tailleLGWidth//100+self.margeX, self.parser.get(i+3)*self.tailleLGWidth//100+ self.margeY,
+             self.placementElementsLocaux(self.parser.get(i)*self.tailleLGWidth//100+self.margeX, self.parser.get(i+1)*self.tailleLGWidth//100 + self.margeY,
+                                          self.parser.get(i+2)*self.tailleLGWidth//100+self.margeX, self.parser.get(i+3)*self.tailleLGWidth//100 + self.margeY,
                                           img1, compteur)
              compteur = compteur + 1
              i = i+4
@@ -144,7 +144,6 @@ class FigureNavon:
 
     def dessinerArc(self, X1, Y1,X2, Y2, angleDepart, angleArrive, imgDraw, img):
         print("dessiner un arc de cercle")
-        b = Y1
         #on dessine l'arc en rouge
         imgDraw.arc([(X1, Y1), (X2, Y2)], angleDepart, angleArrive, fill=(255,0,0))
         font = ImageFont.truetype("arial.ttf", size=int(self.tailleLL))
@@ -155,10 +154,14 @@ class FigureNavon:
                 #si le pixel est dans les tons rouges, alors on est sur l'arc et donc on remet le pixel en blanc
                 if r > g and r > b:
                     img.putpixel((i,j), (255,255,255))
-                    compteur = compteur+1
-                    if compteur == 50:
-                        compteur = 0
-                        imgDraw.text((i, j), str(self.elementLocal), fill=(0, 0, 0), font=font)
+                    '''compteur = compteur+1
+                    if compteur == 40:
+                        compteur = 0'''
+                    imgDraw.text((i, j), str(self.elementLocal), fill=(0, 0, 0), font=font)
+                elif r!=g and g!=b and g!=0:
+                    imgDraw.text((i, j), str(self.elementLocal), fill=(0, 0, 0), font=font)
+
+
 
 
     def ajouterFigureNavon(self, newFigureNavon):
@@ -268,7 +271,7 @@ class FigureNavon:
         self.margeX = nb
 
     def setMargeY(self, nb):
-            self.margeY= +" "
+            self.margeY= nb
 
     def setFichierCharge(self, bool):
         self.fichierCharge = bool
