@@ -9,18 +9,18 @@
      "1":{
 	"Type":"curve",
 	"X1": 0,
-	"Y1": 0,
+	"Y1": 2.5,
 	"X2": 50,
-	"Y2": 50,
+	"Y2": 52.5,
 	"angleDepart": 270,
 	"angleArrive": 90
      },
      "2":{
 	"Type":"curve",
 	"X1": 0,
-	"Y1": 50,
+	"Y1": 52.5,
 	"X2": 50,
-	"Y2": 100,
+	"Y2": 102.5,
 	"angleDepart": 270,
 	"angleArrive": 90
      },
