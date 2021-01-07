@@ -86,19 +86,19 @@ def charge():
         if i==1:
             s_lGlobale.set(element.getElementGlobal())
             s_lLocale.set(element.getElementLocal())
+            nb_tailleX.set(element.getTailleX())
+            nb_tailleY.set(element.getTailleY())
             nb_HeightLG.set(element.getHeightLG())
             nb_HeightLG.set(element.getWidthLG())
             nb_densite.set(element.getDensite())
             nb_HeightLL.set(element.getTailleLL())
             nb_margeX.set(element.getMargeX())
             nb_margeY.set(element.getMargeY())
-            maFigureNavon.setMargeY(nb_tailleX.get())
-            maFigureNavon.setMargeY(nb_tailleY.get())
         i = i + 1
 
     l_listeCombinaisons.pack(side=BOTTOM)
-    bt = tkinter.Button(lf_chargerFichier, txt="get item", command=updateSelection())
-    bt.pack()
+#    bt = tkinter.Button(lf_chargerFichier, txt="get item") #command="updateSelection"
+#    bt.pack()
 
 
 #--------------------------------------------------------------------- TITRE
@@ -259,6 +259,8 @@ def updateSelection():
 
     s_lGlobale.set(element.getElementGlobal())
     s_lLocale.set(element.getElementLocal())
+    #nb_tailleX.set(element.getTailleX())
+    #nb_tailleY.set(element.getTailleY())
     nb_HeightLG.set(element.getHeightLG())
     nb_HeightLG.set(element.getWidthLG())
     nb_densite.set(element.getDensite())

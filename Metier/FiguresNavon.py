@@ -71,10 +71,10 @@ class FigureNavon:
         i=0
         while i<len(self.parser.getListeCoordonnees()):
             #mesure de la taille de tous les segments
-            self.calculMesureTailleSegments(self.parser.get(i)*((self.tailleLGWidth+self.tailleLGHeigh)/2)//100 + self.margeX,
-                                            self.parser.get(i+1)*((self.tailleLGWidth+self.tailleLGHeigh)/2)//100 + self.margeY,
-                                            self.parser.get(i+2)*((self.tailleLGWidth+self.tailleLGHeigh)/2)//100 + self.margeX,
-                                            self.parser.get(i+3)*((self.tailleLGWidth+self.tailleLGHeigh)/2)//100 + self.margeY)
+            self.calculMesureTailleSegments(self.parser.get(i)*((self.tailleLGWidth+self.tailleLGHeight)/2)//100 + self.margeX,
+                                            self.parser.get(i+1)*((self.tailleLGWidth+self.tailleLGHeight)/2)//100 + self.margeY,
+                                            self.parser.get(i+2)*((self.tailleLGWidth+self.tailleLGHeight)/2)//100 + self.margeX,
+                                            self.parser.get(i+3)*((self.tailleLGWidth+self.tailleLGHeight)/2)//100 + self.margeY)
 
             self.nombreDeSegmentsDansLettre=self.nombreDeSegmentsDansLettre+1
             print(self.mesureTailleSegments)
@@ -83,10 +83,10 @@ class FigureNavon:
         i=0
         compteur =0
         while i<len(self.parser.getListeCoordonnees()):
-            self.placementElementsLocaux(self.parser.get(i) * ((self.tailleLGWidth+self.tailleLGHeigh)/2) // 100 + self.margeX,
-                                          self.parser.get(i + 1) * ((self.tailleLGWidth+self.tailleLGHeigh)/2) // 100 + self.margeY,
-                                          self.parser.get(i + 2) * ((self.tailleLGWidth+self.tailleLGHeigh)/2) // 100 + self.margeX,
-                                          self.parser.get(i + 3) * ((self.tailleLGWidth+self.tailleLGHeigh)/2) // 100 + self.margeY,
+            self.placementElementsLocaux(self.parser.get(i) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeX,
+                                          self.parser.get(i + 1) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeY,
+                                          self.parser.get(i + 2) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeX,
+                                          self.parser.get(i + 3) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeY,
                                           img1, compteur)
             compteur = compteur + 1
             i = i+4
@@ -95,9 +95,9 @@ class FigureNavon:
         #Pour la liste des coordonnées et angles des arcs
         while i < len(self.parser.getListeCurve()):
             self.dessinerArc(self.parser.getElementCurve(i) * self.tailleLGWidth // 100 + self.margeX,
-                                         self.parser.getElementCurve(i + 1) * ((self.tailleLGWidth+self.tailleLGHeigh)/2) // 100 + self.margeY,
-                                         self.parser.getElementCurve(i + 2) * ((self.tailleLGWidth+self.tailleLGHeigh)/2) // 100 + self.margeX,
-                                         self.parser.getElementCurve(i + 3) * ((self.tailleLGWidth+self.tailleLGHeigh)/2) // 100 + self.margeY,
+                                         self.parser.getElementCurve(i + 1) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeY,
+                                         self.parser.getElementCurve(i + 2) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeX,
+                                         self.parser.getElementCurve(i + 3) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeY,
                                          self.parser.getElementCurve(i + 4),
                                          self.parser.getElementCurve(i + 5), img1, self.img_figure_navon)
             compteur = compteur + 1
@@ -269,7 +269,7 @@ class FigureNavon:
         self.densite = nb
 
     def setHeightLG(self, nb):
-        self.tailleLGHeigh = nb
+        self.tailleLGHeight = nb
 
     def setWidthLG(self, nb):
         self.tailleLGWidth = nb
@@ -295,6 +295,6 @@ class FigureNavon:
 
     #############################################toString
     def toString(self):
-        return self.getElementGlobal() + " " + self.getElementLocal()+" "+str(self.getWidthLG())+" "+str(self.getHeightLG())+" "+str(self.getDensite())+" "+str(self.tailleLL)+" "+str(self.margeX)+" "+str(self.margeY)
+        return self.getElementGlobal() + " " + self.getElementLocal()+" "+str(self.getTailleX())+" "+str(self.getTailleY())+" "+str(self.getWidthLG())+" "+str(self.getHeightLG())+" "+str(self.getDensite())+" "+str(self.tailleLL)+" "+str(self.margeX)+" "+str(self.margeY)
 
         #return self.getElementGlobal()+" "+self.getElementLocal()+" "+str(self.getWidthLG())+" "+str(self.getHeightLG())+" "+str(self.densite)+" "+str(self.tailleLL)+" "+str(self.margeX)+" "+str(self.margeY())
