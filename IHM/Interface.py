@@ -20,7 +20,7 @@ maFenetre.geometry("800x800")
 f=font.Font(family="Verdana",size=15)
 f_titre=font.Font(family="Verdana",size=20,weight="bold")
 
-maFigureNavon = FigureNavon("A", "B", 400, 400, 40, 20, 10, 10)
+maFigureNavon = FigureNavon("A", "B", 512, 512, 400, 400, 40, 20, 10, 10)
 listeEstChargee = False
 filepathListeChargee = ""
 
@@ -40,6 +40,8 @@ def generer():
     maFigureNavon.setDensite(nb_densite.get())
     maFigureNavon.setMargeX(nb_margeX.get())
     maFigureNavon.setMargeY(nb_margeY.get())
+    maFigureNavon.setTailleX(nb_tailleX.get())
+    maFigureNavon.setTailleY(nb_tailleY.get())
     figure = maFigureNavon.creerFigureNavon()
     maFigureNavon.preview(figure)
 
@@ -55,6 +57,8 @@ def sauvegarde():
         maFigureNavon.setDensite(nb_densite.get())
         maFigureNavon.setMargeX(nb_margeX.get())
         maFigureNavon.setMargeY(nb_margeY.get())
+        maFigureNavon.setMargeY(nb_tailleX.get())
+        maFigureNavon.setMargeY(nb_tailleY.get())
         figure = maFigureNavon.creerFigureNavon()
 
         #récupére le chemin où l'on souvegarde l'image = peut ajouter des extensions ici
@@ -88,6 +92,8 @@ def charge():
             nb_HeightLL.set(element.getTailleLL())
             nb_margeX.set(element.getMargeX())
             nb_margeY.set(element.getMargeY())
+            maFigureNavon.setMargeY(nb_tailleX.get())
+            maFigureNavon.setMargeY(nb_tailleY.get())
         i = i + 1
 
     l_listeCombinaisons.pack(side=BOTTOM)
@@ -124,6 +130,25 @@ champ_lettreLocale.pack(side=LEFT)
 
 f_formeLettres.pack()
 
+# ------------------------------------------------------taille image
+
+f_tailleImage= tkinter.Frame(lf_formeLettres, width=300, height=300, bd=10)
+
+nb_tailleX = tkinter.IntVar()
+nb_tailleX.set(512)
+Label(f_tailleImage, text="Taille image X :").pack(side=LEFT)
+champ_tailleX = tkinter.Entry(f_tailleImage, textvariable=nb_tailleX, bg="white", width="10")
+champ_tailleX.pack(side=LEFT)
+Label(f_tailleImage, text=" px").pack(side=LEFT)
+
+nb_tailleY = tkinter.IntVar()
+nb_tailleY.set(512)
+Label(f_tailleImage, text=" -  Y :").pack(side=LEFT)
+champ_tailleY = tkinter.Entry(f_tailleImage, textvariable=nb_tailleY, bg="white", width="10")
+champ_tailleY.pack(side=LEFT)
+Label(f_tailleImage, text=" px").pack(side=LEFT)
+
+f_tailleImage.pack()
 #------------------------------------------------------HAUTEUR ET LARGEUR LETTRE GLOBALE
 
 f_tailleLG = tkinter.Frame(lf_formeLettres,width=300, height=300, bd=10)
@@ -164,6 +189,8 @@ champ_margeY.pack(side=LEFT)
 Label(f_marge, text=" px").pack(side=LEFT)
 
 f_marge.pack()
+
+
 
 #------------------------------------------------------HAUTEUR ET LARGEUR LETTRE LOCALE
 f_tailleLL = tkinter.Frame(lf_formeLettres,width=300, height=300, bd=10)
