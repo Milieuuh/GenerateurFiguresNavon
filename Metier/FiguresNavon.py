@@ -71,8 +71,11 @@ class FigureNavon:
         i=0
         while i<len(self.parser.getListeCoordonnees()):
             #mesure de la taille de tous les segments
-            self.calculMesureTailleSegments(self.parser.get(i)*self.tailleX//100+self.margeX, self.parser.get(i+1)*self.tailleX//100 + self.margeY,
-                                            self.parser.get(i+2)*self.tailleX//100+self.margeX, self.parser.get(i+3)*self.tailleX//100 + self.margeY)
+            self.calculMesureTailleSegments(self.parser.get(i)*((self.tailleLGWidth+self.tailleLGHeigh)/2)//100 + self.margeX,
+                                            self.parser.get(i+1)*((self.tailleLGWidth+self.tailleLGHeigh)/2)//100 + self.margeY,
+                                            self.parser.get(i+2)*((self.tailleLGWidth+self.tailleLGHeigh)/2)//100 + self.margeX,
+                                            self.parser.get(i+3)*((self.tailleLGWidth+self.tailleLGHeigh)/2)//100 + self.margeY)
+
             self.nombreDeSegmentsDansLettre=self.nombreDeSegmentsDansLettre+1
             print(self.mesureTailleSegments)
             i = i+4
@@ -80,19 +83,21 @@ class FigureNavon:
         i=0
         compteur =0
         while i<len(self.parser.getListeCoordonnees()):
-             self.placementElementsLocaux(self.parser.get(i)*self.tailleX//100+self.margeX, self.parser.get(i+1)*self.tailleX//100 + self.margeY,
-                                          self.parser.get(i+2)*self.tailleX//100+self.margeX, self.parser.get(i+3)*self.tailleX//100 + self.margeY,
+            self.placementElementsLocaux(self.parser.get(i) * ((self.tailleLGWidth+self.tailleLGHeigh)/2) // 100 + self.margeX,
+                                          self.parser.get(i + 1) * ((self.tailleLGWidth+self.tailleLGHeigh)/2) // 100 + self.margeY,
+                                          self.parser.get(i + 2) * ((self.tailleLGWidth+self.tailleLGHeigh)/2) // 100 + self.margeX,
+                                          self.parser.get(i + 3) * ((self.tailleLGWidth+self.tailleLGHeigh)/2) // 100 + self.margeY,
                                           img1, compteur)
-             compteur = compteur + 1
-             i = i+4
+            compteur = compteur + 1
+            i = i+4
 
         i=0
         #Pour la liste des coordonnées et angles des arcs
         while i < len(self.parser.getListeCurve()):
-            self.dessinerArc(self.parser.getElementCurve(i) * self.tailleLG // 100,
-                                         self.parser.getElementCurve(i + 1) * self.tailleLG // 100,
-                                         self.parser.getElementCurve(i + 2) * self.tailleLG // 100,
-                                         self.parser.getElementCurve(i + 3) * self.tailleLG // 100,
+            self.dessinerArc(self.parser.getElementCurve(i) * self.tailleLGWidth // 100 + self.margeX,
+                                         self.parser.getElementCurve(i + 1) * ((self.tailleLGWidth+self.tailleLGHeigh)/2) // 100 + self.margeY,
+                                         self.parser.getElementCurve(i + 2) * ((self.tailleLGWidth+self.tailleLGHeigh)/2) // 100 + self.margeX,
+                                         self.parser.getElementCurve(i + 3) * ((self.tailleLGWidth+self.tailleLGHeigh)/2) // 100 + self.margeY,
                                          self.parser.getElementCurve(i + 4),
                                          self.parser.getElementCurve(i + 5), img1, self.img_figure_navon)
             compteur = compteur + 1
@@ -101,9 +106,6 @@ class FigureNavon:
 
         self.mesureTailleSegments = 0
         self.listeTailleDesSegments = []
-       
-
-
         return self.img_figure_navon
 
     def preview(self, img):
@@ -137,12 +139,12 @@ class FigureNavon:
         elif Xa == Xb:
             y=Ya
             nbElementsLocaux = self.densite * self.mesureTailleSegments / self.tailleLL
-            nbElementSurMonSegment = nbElementsLocaux * self.listeTailleDesSegments[numSegment]  / self.mesureTailleSegments
+            nbElementSurMonSegment =nbElementsLocaux * self.listeTailleDesSegments[numSegment]*self.densite/ self.mesureTailleSegments
             ecart = (self.listeTailleDesSegments[numSegment] * self.densite) / nbElementSurMonSegment
-            while y <self.listeTailleDesSegments[numSegment]:
+            while y <self.listeTailleDesSegments[numSegment]+self.margeY:
                 font = ImageFont.truetype("arial.ttf", size=int(self.tailleLL))
                 img.multiline_text((Xa, y), str(self.elementLocal),  fill=(0, 0, 0), font=font)
-                y= y+ecart
+                y = y+ecart
 
     def dessinerArc(self, X1, Y1,X2, Y2, angleDepart, angleArrive, imgDraw, img):
         print("dessiner un arc de cercle")
