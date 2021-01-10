@@ -6,15 +6,10 @@ from PIL import *
 from math import *
 from matplotlib.patches import *
 import matplotlib.pyplot as plt
+
 class FigureNavon:
 
-    # ATTRIBUTS
-    elementGlobal = ""
-    elementLocal = ""
-    tailleLG = 0
-    fichier = ""
-    nbCaracteresLocaux=0
-    
+
 
     #CONSTRUCTEUR
     def __init__(self):
@@ -115,15 +110,27 @@ class FigureNavon:
         m= (Yb-Ya)/(Xb-Xa)
         p= Ya - Xa*m
         i=Xa
+        x1 = Xa
+        y1 = Xb
 
         nbElementsLocaux = self.densite * self.mesureTailleSegments / self.tailleLL
         nbElementSurMonSegment = nbElementsLocaux * self.listeTailleDesSegments[numSegment]*self.densite/ self.mesureTailleSegments
         ecart = (self.listeTailleDesSegments[numSegment]*self.densite) / nbElementSurMonSegment
+        print("écart ",ecart)
         while i<Xb:
             y= m*i+p
-            font = ImageFont.truetype("arial.ttf", size=int(self.tailleLL))
-            img.multiline_text((i, y), str(self.elementLocal), fill=(0, 0, 0), font=font)
-            i = i+ecart
+            distance = sqrt((x1-i)**2 + (y-y1)**2)
+            print("distance ",distance)
+            if distance >= ecart:
+                font = ImageFont.truetype("arial.ttf", size=int(self.tailleLL))
+                img.multiline_text((i, y), str(self.elementLocal), fill=(0, 0, 0), font=font)
+                x1 = i
+                y1 = y
+
+
+            i = i+1
+
+        #img.multiline_text((Xb, Yb), str(self.elementLocal), fill=(0, 0, 0), font=font)
         
 
     def placementElementsLocaux(self, Xa, Ya, Xb, Yb, img, numSegment):
