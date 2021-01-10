@@ -116,17 +116,14 @@ class FigureNavon:
         nbElementsLocaux = self.densite * self.mesureTailleSegments / self.tailleLL
         nbElementSurMonSegment = nbElementsLocaux * self.listeTailleDesSegments[numSegment]*self.densite/ self.mesureTailleSegments
         ecart = (self.listeTailleDesSegments[numSegment]*self.densite) / nbElementSurMonSegment
-        print("écart ",ecart)
         while i<Xb:
             y= m*i+p
             distance = sqrt((x1-i)**2 + (y-y1)**2)
-            print("distance ",distance)
             if distance >= ecart:
                 font = ImageFont.truetype("arial.ttf", size=int(self.tailleLL))
                 img.multiline_text((i, y), str(self.elementLocal), fill=(0, 0, 0), font=font)
                 x1 = i
                 y1 = y
-
 
             i = i+1
 
