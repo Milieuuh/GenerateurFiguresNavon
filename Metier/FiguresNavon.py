@@ -5,10 +5,11 @@ from PIL import Image, ImageDraw, ImageFont
 from PIL import *
 from math import *
 from matplotlib.patches import *
+
 import matplotlib.pyplot as plt
+import turtle
 
 class FigureNavon:
-
 
 
     #CONSTRUCTEUR
@@ -41,6 +42,8 @@ class FigureNavon:
         self.fichierCharge = False
         self.cheminFichierCharge = ""
 
+        self.aUnArc = False
+
 
     #METHODES
 
@@ -49,7 +52,12 @@ class FigureNavon:
         self.mesureTailleSegments = self.mesureTailleSegments +((Xb-Xa)**2 +(Yb-Ya)**2)**(1/2)
         print(((Xb-Xa)**2 +(Yb-Ya)**2)**(1/2))
         self.listeTailleDesSegments.append(((Xb-Xa)**2 +(Yb-Ya)**2)**(1/2))
-        
+
+    def calculMesureTailleSegmentsArc(self, Xa, Ya, Xb, Yb, angled, angleF):
+        angleDegre = angleF - angled
+        angleRadian = angleDegre * 2 * math.pi / 360
+        self.mesureTailleSegments = self.mesureTailleSegments + 2*math.pi*(Ya-Yb)
+        self.listeTailleDesSegments.append(2*math.pi*(Ya-Yb))
 
 
     def creerFigureNavon(self):
@@ -61,6 +69,9 @@ class FigureNavon:
         self.img_figure_navon = Image.new("RGB", (self.tailleX, self.tailleY), "white")
 
         img1 = ImageDraw.Draw(self.img_figure_navon)
+
+        if self.parser.getListeCurve()!=0:
+            self.aUnArc = True
 
         #on s'occupe des droites en fonction des coordonées obtenues par le parser
         i=0
@@ -75,28 +86,48 @@ class FigureNavon:
             print(self.mesureTailleSegments)
             i = i+4
 
+        while i < len(self.parser.getListeCurve()):
+            # mesure de la taille de tous les segments
+            self.calculMesureTailleSegmentsArc(
+                self.parser.getElementCurve(i) * ((self.tailleLGWidth + self.tailleLGHeight) / 2) // 100 + self.margeX,
+                self.parser.getElementCurve(i + 1) * ((self.tailleLGWidth + self.tailleLGHeight) / 2) // 100 + self.margeY,
+                self.parser.getElementCurve(i + 2) * ((self.tailleLGWidth + self.tailleLGHeight) / 2) // 100 + self.margeX,
+                self.parser.getElementCurve(i + 3) * ((self.tailleLGWidth + self.tailleLGHeight) / 2) // 100 + self.margeY,
+                self.parser.getElementCurve(i + 4),
+                self.parser.getElementCurve(i + 5)
+            )
+
+            self.nombreDeSegmentsDansLettre = self.nombreDeSegmentsDansLettre + 1
+            print(self.mesureTailleSegments)
+            i = i + 6
+
         i=0
-        compteur =0
+        compteur =-1
         while i<len(self.parser.getListeCoordonnees()):
+            compteur = compteur + 1
             self.placementElementsLocaux(self.parser.get(i) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeX,
                                           self.parser.get(i + 1) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeY,
                                           self.parser.get(i + 2) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeX,
                                           self.parser.get(i + 3) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeY,
                                           img1, compteur)
-            compteur = compteur + 1
+
             i = i+4
 
         i=0
+        print("nombre ", len(self.listeTailleDesSegments))
         #Pour la liste des coordonnées et angles des arcs
         while i < len(self.parser.getListeCurve()):
+            compteur = compteur + 1
             self.dessinerArc(self.parser.getElementCurve(i) * self.tailleLGWidth // 100 + self.margeX,
                                          self.parser.getElementCurve(i + 1) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeY,
                                          self.parser.getElementCurve(i + 2) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeX,
                                          self.parser.getElementCurve(i + 3) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeY,
                                          self.parser.getElementCurve(i + 4),
-                                         self.parser.getElementCurve(i + 5), img1, self.img_figure_navon)
-            compteur = compteur + 1
+                                         self.parser.getElementCurve(i + 5), img1, self.img_figure_navon, compteur-1)
+
             i = i + 6
+
+
 
 
         self.mesureTailleSegments = 0
@@ -150,8 +181,9 @@ class FigureNavon:
                 img.multiline_text((Xa, y), str(self.elementLocal),  fill=(0, 0, 0), font=font)
                 y = y+ecart
 
-    def dessinerArc(self, X1, Y1,X2, Y2, angleDepart, angleArrive, imgDraw, img):
+    def dessinerArc(self, X1, Y1,X2, Y2, angleDepart, angleArrive, imgDraw, img, numSegment):
         print("dessiner un arc de cercle")
+
         #on dessine l'arc en rouge
         imgDraw.arc([(X1, Y1), (X2, Y2)], angleDepart, angleArrive, fill=(255,0,0))
         font = ImageFont.truetype("arial.ttf", size=int(self.tailleLL))
@@ -163,11 +195,12 @@ class FigureNavon:
                 if r > g and r > b:
                     img.putpixel((i,j), (255,255,255))
                     compteur = compteur+1
-                    if compteur == 40:
-                        compteur = 0
+                    #if compteur > ecart:
+                       # compteur = 0
                     imgDraw.text((i, j), str(self.elementLocal), fill=(0, 0, 0), font=font)
-                '''elif img.getpixel(i, j) == (0,0,0):
-                    imgDraw.text((i, j), str(self.elementLocal), fill=(0, 0, 0), font=font)'''
+            '''
+        elif img.getpixel(i, j) == (0,0,0):
+            imgDraw.text((i, j), str(self.elementLocal), fill=(0, 0, 0), font=font)'''
 
 
 
