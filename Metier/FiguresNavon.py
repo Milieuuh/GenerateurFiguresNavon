@@ -20,7 +20,7 @@ class FigureNavon:
     def __init__(self):
         print("constructeur")
 
-    def __init__(self, elementG, elementL, tailleX, tailleY, LGHeight, LGWidth,densite,LL, margeX, margeY):
+    def __init__(self, elementG, elementL, tailleX, tailleY, LGHeight, LGWidth,margeX, margeY ,LL,  densite):
         self.elementGlobal = elementG
         self.elementLocal = elementL
         self.mesureTailleSegments = 0
@@ -158,12 +158,13 @@ class FigureNavon:
                 #si le pixel est dans les tons rouges, alors on est sur l'arc et donc on remet le pixel en blanc
                 if r > g and r > b:
                     img.putpixel((i,j), (255,255,255))
-                    '''compteur = compteur+1
+                    compteur = compteur+1
                     if compteur == 40:
-                        compteur = 0'''
+                        compteur = 0
                     imgDraw.text((i, j), str(self.elementLocal), fill=(0, 0, 0), font=font)
-                ''' elif img.getpixel(i, j) == (0,0,0):
+                '''elif img.getpixel(i, j) == (0,0,0):
                     imgDraw.text((i, j), str(self.elementLocal), fill=(0, 0, 0), font=font)'''
+
 
 
 
@@ -295,6 +296,6 @@ class FigureNavon:
 
     #############################################toString
     def toString(self):
-        return self.getElementGlobal() + " " + self.getElementLocal()+" "+str(self.getTailleX())+" "+str(self.getTailleY())+" "+str(self.getWidthLG())+" "+str(self.getHeightLG())+" "+str(self.getDensite())+" "+str(self.tailleLL)+" "+str(self.margeX)+" "+str(self.margeY)
+        return self.getElementGlobal() + " " + self.getElementLocal()+" "+str(self.getTailleX())+" "+str(self.getTailleY())+" "+str(self.getWidthLG())+" "+str(self.getHeightLG())+" "+str(self.margeX)+" "+str(self.margeY)+" "+str(self.tailleLL)+" "+str(self.getDensite())
 
         #return self.getElementGlobal()+" "+self.getElementLocal()+" "+str(self.getWidthLG())+" "+str(self.getHeightLG())+" "+str(self.densite)+" "+str(self.tailleLL)+" "+str(self.margeX)+" "+str(self.margeY())

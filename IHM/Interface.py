@@ -20,7 +20,7 @@ maFenetre.geometry("800x800")
 f=font.Font(family="Verdana",size=15)
 f_titre=font.Font(family="Verdana",size=20,weight="bold")
 
-maFigureNavon = FigureNavon("A", "B", 512, 512, 400, 400, 40, 20, 10, 10)
+maFigureNavon = FigureNavon("A", "B", 512, 512, 400, 400, 10, 10, 18, 0.5)
 listeEstChargee = False
 filepathListeChargee = ""
 
