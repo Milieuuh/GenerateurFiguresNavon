@@ -241,10 +241,10 @@ f_BOUTON.pack()
 
 #--------------------------------------------------------------------- BOUTON OUVRIR FICHIER PRE-EXISTANT
 lf_chargerFichier= tkinter.LabelFrame(maFenetre, text="Load Setting File", padx=5,pady=1)
-lf_chargerFichier.pack(fill="both",padx="10",pady="10",ipady="20",ipadx="10")
+lf_chargerFichier.pack(fill="both",padx="10",pady="5",ipady="2",ipadx="10")
 
 lf_nomFichier = tkinter.Frame(lf_chargerFichier,width=300, height=300, bd=10)
-lf_listeFichier = tkinter.Frame(lf_chargerFichier,width=300, height=300, bd=10)
+lf_listeFichier = tkinter.Frame(lf_chargerFichier,width=300, height=300)
 
     #bouton charger fichier
 bt_Charge = tkinter.Button(lf_chargerFichier, relief=RAISED, bg="#32CD32", fg="WHITE",text="Load",command=charge)
@@ -296,7 +296,7 @@ def updateSelection():
 
 #--------------------------------------------------------------------- BOUTON GENERER LE FICHIER
 lf_sauvegardeForme= tkinter.LabelFrame(maFenetre, text="Save",padx=5,pady=1)
-lf_sauvegardeForme.pack(fill="both",padx="10",pady="10",ipady="20",ipadx="10")
+lf_sauvegardeForme.pack(fill="both",padx="10",pady="10",ipady="5",ipadx="10")
 
 
     #Bouton générer
