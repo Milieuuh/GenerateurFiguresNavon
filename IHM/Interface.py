@@ -72,15 +72,27 @@ def sauvegarde():
 
 #------------------------------------------------------------Charger les données d'un fichier text
 def charge():
+
     filepathListeChargee = askopenfilename(initialdir="/", title="Open as", defaultextension="*.*", filetypes=(("text files", "*.txt"), ("all files", "*.*")))
-    Label(lf_chargerFichier, text=filepathListeChargee).pack(side=LEFT)
+
     maFigureNavon.chargerFigure(filepathListeChargee)
     maFigureNavon.setFichierCharge(True)
+    s_CheminFichier.set(filepathListeChargee)
+
 
     # Liste des différentes combinaisons
 
+    #test si liste vide ou non
+    while (l_listeCombinaisons.size()>0):
+        for i in range(l_listeCombinaisons.size()):
+            print("JE SUPPRIME à L'INDEX ", i, " -> ", l_listeCombinaisons.get(i))
+            l_listeCombinaisons.delete(i)
+
+
+
     i = 1
     for element in maFigureNavon.getListeFiguresNavon():
+        print("ELEMENT")
         l_listeCombinaisons.insert(i, element.toString())
 
         if i==1:
@@ -231,16 +243,21 @@ f_BOUTON.pack()
 lf_chargerFichier= tkinter.LabelFrame(maFenetre, text="Load Setting File", padx=5,pady=1)
 lf_chargerFichier.pack(fill="both",padx="10",pady="10",ipady="20",ipadx="10")
 
+lf_nomFichier = tkinter.Frame(lf_chargerFichier,width=300, height=300, bd=10)
+lf_listeFichier = tkinter.Frame(lf_chargerFichier,width=300, height=300, bd=10)
+
     #bouton charger fichier
 bt_Charge = tkinter.Button(lf_chargerFichier, relief=RAISED, bg="#32CD32", fg="WHITE",text="Load",command=charge)
 bt_Charge['font']=f
-bt_Charge.pack()
 
     #texte et affichage de l'adresse
-Label(lf_chargerFichier,text="File load : ").pack(side=LEFT)
+Label(lf_nomFichier,text="File load : ").pack(side=LEFT)
+s_CheminFichier=tkinter.StringVar()
+s_CheminFichier.set("")
+Label(lf_nomFichier,textvariable=s_CheminFichier).pack(side=LEFT)
 
     #Liste des différentes combinaisons
-l_listeCombinaisons = tkinter.Listbox(lf_chargerFichier, listvariable=maFigureNavon.getListeFiguresNavon(),
+l_listeCombinaisons = tkinter.Listbox(lf_listeFichier, listvariable=maFigureNavon.getListeFiguresNavon(),
                                       activestyle='underline', height=3, width=100, selectmode='single')
 
 i=1
@@ -248,7 +265,13 @@ for element in maFigureNavon.getListeFiguresNavon():
     l_listeCombinaisons.insert(i,element)
     i=i+1
 
-l_listeCombinaisons.pack(side=BOTTOM)
+
+bt_Charge.pack()
+l_listeCombinaisons.pack()
+lf_nomFichier.pack()
+lf_listeFichier.pack()
+
+
 
 selected_item = StringVar()
 

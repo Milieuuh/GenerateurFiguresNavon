@@ -204,7 +204,8 @@ class FigureNavon:
 
 
 
-
+    def remettreAZeroLaListe(self):
+        self.listeFiguresNavon = []
 
     def ajouterFigureNavon(self, newFigureNavon):
         self.listeFiguresNavon.append(newFigureNavon)
@@ -217,6 +218,8 @@ class FigureNavon:
         self.fichier=fichier
         self.fichierCharge = True
         self.cheminFichierCharge = fichier
+
+        self.remettreAZeroLaListe()
 
         parseurFichier = ParserListeFigures.ParserListeFigures(fichier)
         parseurFichier.recupererDonneesFichier()
@@ -292,6 +295,7 @@ class FigureNavon:
 
     def getTailleY(self):
         return  self.tailleY
+
 
     ###############################################SETTER
     def setElementGlobal(self, elmt):
