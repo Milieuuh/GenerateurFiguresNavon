@@ -118,7 +118,7 @@ class FigureNavon:
         i=0
         #Pour la liste des coordonnées et angles des arcs
         while i < len(self.parser.getListeCurve()):
-            self.dessinerArc(self.parser.getElementCurve(i) * self.tailleLGWidth // 100 + self.margeX,
+            self.dessinerArc(self.parser.getElementCurve(i) ** ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeX,
                                          self.parser.getElementCurve(i + 1) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeY,
                                          self.parser.getElementCurve(i + 2) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeX,
                                          self.parser.getElementCurve(i + 3) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeY,
