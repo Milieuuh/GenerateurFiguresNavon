@@ -123,7 +123,7 @@ class FigureNavon:
                                          self.parser.getElementCurve(i + 2) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeX,
                                          self.parser.getElementCurve(i + 3) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeY,
                                          self.parser.getElementCurve(i + 4),
-                                         self.parser.getElementCurve(i + 5), img1, self.img_figure_navon,  compteur+1)
+                                         self.parser.getElementCurve(i + 5), img1,  compteur+1)
             compteur = compteur +1
             i = i + 6
 
@@ -174,42 +174,34 @@ class FigureNavon:
         elif Xa == Xb:
             y=Ya
             nbElementsLocaux = self.densite * self.mesureTailleSegments / self.tailleLL
-            nbElementSurMonSegment =nbElementsLocaux * self.listeTailleDesSegments[numSegment]*self.densite/ self.mesureTailleSegments
+            nbElementSurMonSegment = nbElementsLocaux * self.listeTailleDesSegments[numSegment]*self.densite / self.mesureTailleSegments
             ecart = (self.listeTailleDesSegments[numSegment] * self.densite) / nbElementSurMonSegment
             while y <self.listeTailleDesSegments[numSegment]+self.margeY:
                 font = ImageFont.truetype("arial.ttf", size=int(self.tailleLL))
                 img.multiline_text((Xa, y), str(self.elementLocal),  fill=(0, 0, 0), font=font)
                 y = y+ecart
 
-    def dessinerArc(self, X1, Y1, X2, Y2, angleDepart, angleArrive, imgDraw, img, numSegment):
+    def dessinerArc(self, X1, Y1, X2, Y2, angleDepart, angleArrive, imgDraw, numSegment):
         print("dessiner un arc de cercle")
 
         nbElementsLocaux = self.densite * self.mesureTailleSegments / self.tailleLL
-        nbElementSurMonSegment = nbElementsLocaux * self.listeTailleDesSegments[numSegment]  / self.mesureTailleSegments
-        ecart = (self.listeTailleDesSegments[numSegment] * self.densite) / nbElementSurMonSegment
+        nbElementSurMonSegment = nbElementsLocaux * self.listeTailleDesSegments[numSegment] / self.mesureTailleSegments
 
         #on cherche l'équation de cercle de la forme (x-x0)²+(y-y0)² = r²
         y0 = Y1+(Y2-Y1)/2
         x0 = X1
-        r= (Y2-Y1)/2
-        print("nbElement locaux : ",nbElementsLocaux)
-        print("taille : ",self.listeTailleDesSegments[numSegment])
-        print("nb sur segment", nbElementSurMonSegment)
-        print("mesure ", self.mesureTailleSegments)
+        r = (Y2-Y1)/2
 
         font = ImageFont.truetype("arial.ttf", size=int(self.tailleLL))
         x = X1
-        compteur=0
-        print("RAYON + y0 : ", y0+r)
-        #while x<y0+r and compteur==20:
-        while x<y0+r and compteur <nbElementSurMonSegment/2:
+        compteur = 0
+        while x < y0+r and compteur < nbElementSurMonSegment/2:
             y = y0 + sqrt(r**2 - (x-x0)**2)
             y2 = y0 - sqrt(r**2 - (x-x0)**2)
             imgDraw.text((x+100, y), str(self.elementLocal), fill=(0, 0, 0), font=font)
             imgDraw.text((x+100, y2), str(self.elementLocal), fill=(0, 0, 0), font=font)
-            x = r * math.cos(math.pi *1/2-2 *compteur/ (nbElementSurMonSegment/2))+x0
+            x = r * math.cos(math.pi *1/2-2 * compteur/ (nbElementSurMonSegment/2))+x0
             compteur = compteur + 1
-
 
 
 
