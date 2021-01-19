@@ -50,14 +50,18 @@ class FigureNavon:
     def calculMesureTailleSegments(self, Xa, Ya, Xb, Yb):
         print("calcul taille de la lettre")
         self.mesureTailleSegments = self.mesureTailleSegments +((Xb-Xa)**2 +(Yb-Ya)**2)**(1/2)
-        print(((Xb-Xa)**2 +(Yb-Ya)**2)**(1/2))
         self.listeTailleDesSegments.append(((Xb-Xa)**2 +(Yb-Ya)**2)**(1/2))
+
+
 
     def calculMesureTailleSegmentsArc(self, Xa, Ya, Xb, Yb, angled, angleF):
         angleDegre = angleF - angled
-        angleRadian = angleDegre * 2 * math.pi / 360
-        self.mesureTailleSegments = self.mesureTailleSegments + 2*math.pi*(Ya-Yb)
-        self.listeTailleDesSegments.append(2*math.pi*(Ya-Yb))
+        angleRadian = angleDegre * math.pi / 180
+        if angleRadian<0:
+            angleRadian = -angleRadian
+        print("----------------------->", angleRadian *((Yb - Ya) / 2 ))
+        self.mesureTailleSegments = self.mesureTailleSegments + angleRadian * ((Yb - Ya) / 2)
+        self.listeTailleDesSegments.append(angleRadian * ((Yb - Ya) / 2))
 
 
     def creerFigureNavon(self):
@@ -83,9 +87,9 @@ class FigureNavon:
                                             self.parser.get(i+3)*((self.tailleLGWidth+self.tailleLGHeight)/2)//100 + self.margeY)
 
             self.nombreDeSegmentsDansLettre=self.nombreDeSegmentsDansLettre+1
-            print(self.mesureTailleSegments)
             i = i+4
 
+        i=0
         while i < len(self.parser.getListeCurve()):
             # mesure de la taille de tous les segments
             self.calculMesureTailleSegmentsArc(
@@ -94,11 +98,9 @@ class FigureNavon:
                 self.parser.getElementCurve(i + 2) * ((self.tailleLGWidth + self.tailleLGHeight) / 2) // 100 + self.margeX,
                 self.parser.getElementCurve(i + 3) * ((self.tailleLGWidth + self.tailleLGHeight) / 2) // 100 + self.margeY,
                 self.parser.getElementCurve(i + 4),
-                self.parser.getElementCurve(i + 5)
-            )
+                self.parser.getElementCurve(i + 5))
 
             self.nombreDeSegmentsDansLettre = self.nombreDeSegmentsDansLettre + 1
-            print(self.mesureTailleSegments)
             i = i + 6
 
         i=0
@@ -114,17 +116,15 @@ class FigureNavon:
             i = i+4
 
         i=0
-        print("nombre ", len(self.listeTailleDesSegments))
         #Pour la liste des coordonnées et angles des arcs
         while i < len(self.parser.getListeCurve()):
-            compteur = compteur + 1
             self.dessinerArc(self.parser.getElementCurve(i) * self.tailleLGWidth // 100 + self.margeX,
                                          self.parser.getElementCurve(i + 1) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeY,
                                          self.parser.getElementCurve(i + 2) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeX,
                                          self.parser.getElementCurve(i + 3) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeY,
                                          self.parser.getElementCurve(i + 4),
-                                         self.parser.getElementCurve(i + 5), img1, self.img_figure_navon, compteur-1)
-
+                                         self.parser.getElementCurve(i + 5), img1, self.img_figure_navon,  compteur+1)
+            compteur = compteur +1
             i = i + 6
 
 
@@ -181,26 +181,36 @@ class FigureNavon:
                 img.multiline_text((Xa, y), str(self.elementLocal),  fill=(0, 0, 0), font=font)
                 y = y+ecart
 
-    def dessinerArc(self, X1, Y1,X2, Y2, angleDepart, angleArrive, imgDraw, img, numSegment):
+    def dessinerArc(self, X1, Y1, X2, Y2, angleDepart, angleArrive, imgDraw, img, numSegment):
         print("dessiner un arc de cercle")
 
-        #on dessine l'arc en rouge
-        imgDraw.arc([(X1, Y1), (X2, Y2)], angleDepart, angleArrive, fill=(255,0,0))
+        nbElementsLocaux = self.densite * self.mesureTailleSegments / self.tailleLL
+        nbElementSurMonSegment = nbElementsLocaux * self.listeTailleDesSegments[numSegment]  / self.mesureTailleSegments
+        ecart = (self.listeTailleDesSegments[numSegment] * self.densite) / nbElementSurMonSegment
+
+        #on cherche l'équation de cercle de la forme (x-x0)²+(y-y0)² = r²
+        y0 = Y1+(Y2-Y1)/2
+        x0 = X1
+        r= (Y2-Y1)/2
+        print("nbElement locaux : ",nbElementsLocaux)
+        print("taille : ",self.listeTailleDesSegments[numSegment])
+        print("nb sur segment", nbElementSurMonSegment)
+        print("mesure ", self.mesureTailleSegments)
+
         font = ImageFont.truetype("arial.ttf", size=int(self.tailleLL))
-        compteur = 0
-        for i in range (self.tailleX):
-            for j in range (self.tailleY):
-                r, g, b = img.getpixel((i, j))
-                #si le pixel est dans les tons rouges, alors on est sur l'arc et donc on remet le pixel en blanc
-                if r > g and r > b:
-                    img.putpixel((i,j), (255,255,255))
-                    compteur = compteur+1
-                    #if compteur > ecart:
-                       # compteur = 0
-                    imgDraw.text((i, j), str(self.elementLocal), fill=(0, 0, 0), font=font)
-            '''
-        elif img.getpixel(i, j) == (0,0,0):
-            imgDraw.text((i, j), str(self.elementLocal), fill=(0, 0, 0), font=font)'''
+        x = X1
+        compteur=0
+        print("RAYON + y0 : ", y0+r)
+        #while x<y0+r and compteur==20:
+        while x<y0+r and compteur <nbElementSurMonSegment/2:
+            y = y0 + sqrt(r**2 - (x-x0)**2)
+            y2 = y0 - sqrt(r**2 - (x-x0)**2)
+            imgDraw.text((x+100, y), str(self.elementLocal), fill=(0, 0, 0), font=font)
+            imgDraw.text((x+100, y2), str(self.elementLocal), fill=(0, 0, 0), font=font)
+            x = r * math.cos(math.pi *1/2-2 *compteur/ (nbElementSurMonSegment/2))+x0
+            compteur = compteur + 1
+
+
 
 
 
