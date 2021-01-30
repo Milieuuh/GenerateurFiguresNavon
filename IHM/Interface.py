@@ -49,18 +49,20 @@ def generer():
 def sauvegarde():
 
     if maFigureNavon.getFichierCharge() == False:
-        maFigureNavon.setElementGlobal(s_lGlobale.get())
-        maFigureNavon.setElementLocal(s_lLocale.get())
+        print("hey !")
+        res_LettreGlobale = s_lGlobale.get()
+        res_LettreLocale = s_lLocale.get()
+        maFigureNavon.setElementGlobal(res_LettreGlobale)
+        maFigureNavon.setElementLocal(res_LettreLocale)
         maFigureNavon.setHeightLG(nb_HeightLG.get())
         maFigureNavon.setWidthLG(nb_widthLG.get())
         maFigureNavon.setTailleLL(nb_HeightLL.get())
         maFigureNavon.setDensite(nb_densite.get())
         maFigureNavon.setMargeX(nb_margeX.get())
         maFigureNavon.setMargeY(nb_margeY.get())
-        maFigureNavon.setMargeY(nb_tailleX.get())
-        maFigureNavon.setMargeY(nb_tailleY.get())
+        maFigureNavon.setTailleX(nb_tailleX.get())
+        maFigureNavon.setTailleY(nb_tailleY.get())
         figure = maFigureNavon.creerFigureNavon()
-
         #récupére le chemin où l'on souvegarde l'image = peut ajouter des extensions ici
         filepath = tkinter.filedialog.asksaveasfilename(initialdir="/", title="Save as", defaultextension="*.*",
                                                         filetypes=(("png files", "*.png"),('jpeg files','*.jpg'),('all files','*.*')))
