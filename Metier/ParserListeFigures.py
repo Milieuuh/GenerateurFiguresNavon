@@ -23,7 +23,8 @@ class ParserListeFigures:
             lignes = fichier.readlines()
         for ligne in lignes:
             champs = ligne.split()
-            self.listeFigures.append(FigureNavon(champs[0],champs[1], int(champs[2]), int(champs[3]), int(champs[4]), int(champs[5]), int(champs[6]), int(champs[7]), int(champs[8]), float(champs[9])))
+            if not(champs[0].startswith("#")):
+                self.listeFigures.append(FigureNavon(champs[0],champs[1], int(champs[2]), int(champs[3]), int(champs[4]), int(champs[5]), int(champs[6]), int(champs[7]), int(champs[8]), float(champs[9])))
 
 
 
