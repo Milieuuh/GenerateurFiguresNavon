@@ -150,7 +150,7 @@ f_tailleImage= tkinter.Frame(lf_formeLettres, width=300, height=300, bd=10)
 
 nb_tailleX = tkinter.IntVar()
 nb_tailleX.set(512)
-Label(f_tailleImage, text="Taille image X :").pack(side=LEFT)
+Label(f_tailleImage, text="Picture size X :").pack(side=LEFT)
 champ_tailleX = tkinter.Entry(f_tailleImage, textvariable=nb_tailleX, bg="white", width="10")
 champ_tailleX.pack(side=LEFT)
 Label(f_tailleImage, text=" px").pack(side=LEFT)
