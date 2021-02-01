@@ -202,25 +202,32 @@ class FigureNavon:
                 y = y0 + sqrt(r**2 - (x-x0)**2)
                 imgDraw.text((x, y), str(self.elementLocal), fill=(0, 0, 0), font=font)
                 x = r * math.cos(math.pi * compteur/ (nbElementSurMonSegment/2))+x0
-                compteur = compteur + 1
+                compteur = compteur +1
 
-            #demi cercle à droite
-            elif angleDepart > angleArrive:
+            #demi cercle à gauche
+            elif angleArrive >angleDepart:
                 y = y0 + sqrt(r ** 2 - (x - x0) ** 2)
                 y2 = y0 - sqrt(r ** 2 - (x - x0) ** 2)
                 imgDraw.text((x, y), str(self.elementLocal), fill=(0, 0, 0), font=font)
                 imgDraw.text((x, y2), str(self.elementLocal), fill=(0, 0, 0), font=font)
-                x = r * math.cos(math.pi * 1/2-2 * compteur / (nbElementSurMonSegment / 2)) + x0
+                x = r * math.cos(math.pi * -1/2-2 * compteur / (nbElementSurMonSegment / 2)) + x0
                 compteur = compteur + 1
 
-            #demi cercle à gauche
+            elif self.elementGlobal == "G" or self.elementGlobal == "g":
+                y = y0 + sqrt(r ** 2 - (x - x0) ** 2)
+                imgDraw.text((x, y), str(self.elementLocal), fill=(0, 0, 0), font=font)
+                x = r * math.cos(math.pi * 1 / 4 - 2 * compteur / (nbElementSurMonSegment / 2)) + x0
+                compteur = compteur + 1
+
+            #demi cercle à droite
             else:
                 y = y0 + sqrt(r ** 2 - (x - x0) ** 2)
                 y2 = y0 - sqrt(r ** 2 - (x - x0) ** 2)
                 imgDraw.text((x, y), str(self.elementLocal), fill=(0, 0, 0), font=font)
                 imgDraw.text((x, y2), str(self.elementLocal), fill=(0, 0, 0), font=font)
-                x = r * math.cos(math.pi * -1 /2 - 2 * compteur / (nbElementSurMonSegment / 2)) + x0
+                x = r * math.cos(math.pi * 1 /2 - 2 * compteur / (nbElementSurMonSegment / 2)) + x0
                 compteur = compteur + 1
+
 
 
 
