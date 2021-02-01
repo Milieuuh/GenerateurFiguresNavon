@@ -28,9 +28,9 @@
 	"Y1": 50,
 	"X2": 100,
 	"Y2": 100,
-	"angleDepart": 270,
-	"angleArrive": 320
-     }
+	"angleDepart": 315,
+	"angleArrive": 270
+	 }
 
      
 }
