@@ -202,7 +202,7 @@ class FigureNavon:
                 y2 = y0 - sqrt(r**2 - (x-x0)**2)
                 imgDraw.text((x, y), str(self.elementLocal), fill=(0, 0, 0), font=font)
                 imgDraw.text((x, y2), str(self.elementLocal), fill=(0, 0, 0), font=font)
-                x = r * math.cos(math.pi  * compteur/ (nbElementSurMonSegment/2))+x0
+                x = r * math.cos(math.pi * compteur/ (nbElementSurMonSegment/2))+x0
                 compteur = compteur + 1
 
             elif angleDepart > angleArrive:
@@ -215,8 +215,8 @@ class FigureNavon:
             else:
                 y = y0 + sqrt(r ** 2 - (x - x0) ** 2)
                 y2 = y0 - sqrt(r ** 2 - (x - x0) ** 2)
-                imgDraw.text((x+200, y), str(self.elementLocal), fill=(0, 0, 0), font=font)
-                imgDraw.text((x+200 , y2), str(self.elementLocal), fill=(0, 0, 0), font=font)
+                imgDraw.text((x, y), str(self.elementLocal), fill=(0, 0, 0), font=font)
+                imgDraw.text((x, y2), str(self.elementLocal), fill=(0, 0, 0), font=font)
                 x = r * math.cos(math.pi * -1 /2 - 2 * compteur / (nbElementSurMonSegment / 2)) + x0
                 compteur = compteur + 1
 
