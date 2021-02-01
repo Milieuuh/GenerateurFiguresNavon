@@ -118,7 +118,7 @@ class FigureNavon:
         i=0
         #Pour la liste des coordonnées et angles des arcs
         while i < len(self.parser.getListeCurve()):
-            self.dessinerArc(self.parser.getElementCurve(i) ** ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeX,
+            self.dessinerArc(self.parser.getElementCurve(i) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeX,
                                          self.parser.getElementCurve(i + 1) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeY,
                                          self.parser.getElementCurve(i + 2) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeX,
                                          self.parser.getElementCurve(i + 3) * ((self.tailleLGWidth+self.tailleLGHeight)/2) // 100 + self.margeY,
@@ -195,14 +195,30 @@ class FigureNavon:
         font = ImageFont.truetype("arial.ttf", size=int(self.tailleLL))
         x = X1
         compteur = 0
-        while x < y0+r and compteur < nbElementSurMonSegment/2:
-            y = y0 + sqrt(r**2 - (x-x0)**2)
-            y2 = y0 - sqrt(r**2 - (x-x0)**2)
-            imgDraw.text((x+100, y), str(self.elementLocal), fill=(0, 0, 0), font=font)
-            imgDraw.text((x+100, y2), str(self.elementLocal), fill=(0, 0, 0), font=font)
-            x = r * math.cos(math.pi *1/2-2 * compteur/ (nbElementSurMonSegment/2))+x0
-            compteur = compteur + 1
+        while x < y0+r and compteur < nbElementSurMonSegment/2 or compteur < nbElementSurMonSegment/2 :
+            if angleDepart == 360:
+                print("hey")
+                y = y0 + sqrt(r**2 - (x-x0)**2)
+                y2 = y0 - sqrt(r**2 - (x-x0)**2)
+                imgDraw.text((x, y), str(self.elementLocal), fill=(0, 0, 0), font=font)
+                imgDraw.text((x, y2), str(self.elementLocal), fill=(0, 0, 0), font=font)
+                x = r * math.cos(math.pi  * compteur/ (nbElementSurMonSegment/2))+x0
+                compteur = compteur + 1
 
+            elif angleDepart > angleArrive:
+                y = y0 + sqrt(r ** 2 - (x - x0) ** 2)
+                y2 = y0 - sqrt(r ** 2 - (x - x0) ** 2)
+                imgDraw.text((x, y), str(self.elementLocal), fill=(0, 0, 0), font=font)
+                imgDraw.text((x, y2), str(self.elementLocal), fill=(0, 0, 0), font=font)
+                x = r * math.cos(math.pi * 1/2-2 * compteur / (nbElementSurMonSegment / 2)) + x0
+                compteur = compteur + 1
+            else:
+                y = y0 + sqrt(r ** 2 - (x - x0) ** 2)
+                y2 = y0 - sqrt(r ** 2 - (x - x0) ** 2)
+                imgDraw.text((x+200, y), str(self.elementLocal), fill=(0, 0, 0), font=font)
+                imgDraw.text((x+200 , y2), str(self.elementLocal), fill=(0, 0, 0), font=font)
+                x = r * math.cos(math.pi * -1 /2 - 2 * compteur / (nbElementSurMonSegment / 2)) + x0
+                compteur = compteur + 1
 
 
 
